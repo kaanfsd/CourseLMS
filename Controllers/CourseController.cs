@@ -4,6 +4,5 @@ namespace CourseLMS.Controllers
 {
     public class CourseController 
     {
-       //deneme
     }
 }
