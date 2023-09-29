@@ -7,11 +7,11 @@
 <h1>Users</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" style="float: right;" class="btn btn-outline-dark mb-3">+ Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-danger">
             <th>
                 @Html.DisplayNameFor(model => model.Username)
             </th>
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
+                @Html.DisplayNameFor(model => model.Password )
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Role)
@@ -29,25 +29,28 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr class="table-success">
             <td>
                 @Html.DisplayFor(modelItem => item.Username)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
+                <td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
+                    <div>
+                    <a asp-action="Edit" asp-route-id="@item.UserID" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.UserID" class="btn btn-outline-warning btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.UserID" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </div>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
