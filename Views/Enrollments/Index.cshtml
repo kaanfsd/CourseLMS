@@ -7,11 +7,11 @@
 <h1>Enrollments</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+        <a asp-action="Create" style="float: right;" class="btn btn-outline-dark mb-3">+ Create New</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-danger">
             <th>
                 @Html.DisplayNameFor(model => model.UserID)
             </th>
@@ -26,7 +26,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr class="table-success">
             <td>
                 @Html.DisplayFor(modelItem => item.User.Username)
             </td>
@@ -37,9 +37,11 @@
                 @Html.DisplayFor(modelItem => item.EnrollmentDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.EnrollmentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EnrollmentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EnrollmentID">Delete</a>
+                    <div>
+                    <a asp-action="Edit" asp-route-id="@item.EnrollmentID" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.EnrollmentID" class="btn btn-outline-warning btn-sm" >Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.EnrollmentID" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </div> 
             </td>
         </tr>
 }
