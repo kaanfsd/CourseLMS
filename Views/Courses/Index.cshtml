@@ -4,64 +4,84 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Courses</h1>
+@*a*@
 
-<p>
-    <a asp-action="Create" style="float: right;" class="btn btn-outline-dark mb-3">+ Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr class="table-danger">
-            <th>
+<div class="card shadow border-0 mt-4"> 
+    <div class="card-body p-4">
+        <div class="row pb-4">
+            <div class="col-6">
+            <h2 class="text-black py-2">Courses</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Courses" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle "></i> Create New Course
+                </a>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+
+                <tr>
+                <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InstructorID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EnrollmentCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageURL)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-            <tr class="table-success">
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageURL)
-            </td>
-                <td>
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-outline-primary btn-sm">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-outline-warning btn-sm">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-outline-danger btn-sm">Delete</a>
-                    </div>
-                </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InstructorID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EnrollmentCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageURL)
+                </th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-info">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EnrollmentCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageURL)
+                    </td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm mx-2">
+                                    <i class="bi bi-pencil-square"></i>Edit
+                                </a>
+                                <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm mx-2">
+                                    <i class="bi bi-pencil-square"></i>Details
+                                </a>
+                                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-danger btn-sm mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
