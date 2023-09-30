@@ -28,7 +28,7 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="InstructorID" class="form-control border-0 shadow" />
+                    <select asp-for="InstructorID" class="form-control border-0 shadow" asp-items="ViewBag.InstructorID"></select>
                     <label asp-for="InstructorID" class="ms-2 text-black"></label>
                     <span asp-validation-for="InstructorID" class="text-danger"></span>
                 </div>
