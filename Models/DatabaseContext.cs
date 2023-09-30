@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace CourseLMS.Models
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> opts) : base(opts) { }
 
@@ -17,6 +18,15 @@ namespace CourseLMS.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasData(
+                new User { UserID=1, Username="Kaan", Role="Admin", Password="kaan123", Email="kaanfsd9@gmail.com"},
+                new User { UserID = 2, Username = "Ahmet", Role = "Instructor", Password = "ahmet123", Email = "ahmet@gmail.com" },
+                new User { UserID = 3, Username = "Mehmet", Role = "User", Password = "mehmet123", Email = "mehmet@gmail.com" }
+                );
+
+
             modelBuilder.Entity<Enrollment>()
             .HasOne(e => e.User)
             .WithMany(u => u.Enrollments)
