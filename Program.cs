@@ -1,8 +1,10 @@
 using CourseLMS.Models;
 using CourseLMS.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DatabaseContextConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseContextConnection' not found.");
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
@@ -13,6 +15,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(opts => {
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:MonitoringConnection"]);
 });
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<DatabaseContext>();
 
 var app = builder.Build();
 
@@ -28,6 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
