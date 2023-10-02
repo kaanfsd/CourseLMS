@@ -49,7 +49,7 @@ namespace CourseLMS.Controllers
         public IActionResult Create()
         {
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title");
-            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Username");
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EnrollmentID,UserID,CourseID,EnrollmentDate")] Enrollment enrollment)
+        public async Task<IActionResult> Create([Bind("EnrollmentID,Id,CourseID,EnrollmentDate")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace CourseLMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title", enrollment.CourseID);
-            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Username", enrollment.UserID);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "UserName", enrollment.Id);
             return View(enrollment);
         }
 
@@ -85,7 +85,7 @@ namespace CourseLMS.Controllers
                 return NotFound();
             }
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title", enrollment.CourseID);
-            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Username", enrollment.UserID);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "UserName", enrollment.Id);
             return View(enrollment);
         }
 
@@ -94,7 +94,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EnrollmentID,UserID,CourseID,EnrollmentDate")] Enrollment enrollment)
+        public async Task<IActionResult> Edit(int id, [Bind("EnrollmentID,Id,CourseID,EnrollmentDate")] Enrollment enrollment)
         {
             if (id != enrollment.EnrollmentID)
             {
@@ -122,7 +122,7 @@ namespace CourseLMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title", enrollment.CourseID);
-            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Username", enrollment.UserID);
+            ViewData["Id"] = new SelectList(_context.Users, "Id", "UserName", enrollment.Id);
             return View(enrollment);
         }
 

@@ -47,7 +47,7 @@ namespace CourseLMS.Controllers
         // GET: Courses/Create
         public IActionResult Create()
         {
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username");
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace CourseLMS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username", course.InstructorID);
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
 
@@ -81,7 +81,7 @@ namespace CourseLMS.Controllers
             {
                 return NotFound();
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username", course.InstructorID);
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
 
@@ -117,7 +117,7 @@ namespace CourseLMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username", course.InstructorID);
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
 

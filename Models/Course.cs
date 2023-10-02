@@ -19,7 +19,7 @@ namespace CourseLMS.Models
 
         [Required]
         [DisplayName("Instructor")]
-        public int InstructorID { get; set; }
+        public string InstructorID { get; set; }
 
         [ForeignKey("InstructorID")]
         [InverseProperty("Courses")]

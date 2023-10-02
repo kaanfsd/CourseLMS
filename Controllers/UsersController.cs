@@ -35,7 +35,7 @@ namespace CourseLMS.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserID == id);
+                .FirstOrDefaultAsync(m => m.Id.Equals(id));
             if (user == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Username,Email,Password,Role")] User user)
+        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +87,9 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,Username,Email,Password,Role")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Email,Password,Role")] User user)
         {
-            if (id != user.UserID)
+            if (!id.Equals(user.Id))
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace CourseLMS.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserID))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace CourseLMS.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserID == id);
+                .FirstOrDefaultAsync(m => m.Id.Equals(id));
             if (user == null)
             {
                 return NotFound();
@@ -154,9 +154,9 @@ namespace CourseLMS.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
-          return (_context.Users?.Any(e => e.UserID == id)).GetValueOrDefault();
+          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
