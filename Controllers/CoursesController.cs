@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CourseLMS.Controllers
 {
+    [Authorize]
     public class CoursesController : Controller
     {
         private readonly DatabaseContext _context;
@@ -22,11 +24,25 @@ namespace CourseLMS.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.Courses.Include(c => c.User);
-            return View(await databaseContext.ToListAsync());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var userEnrollments = _context.Enrollments.Where(enrollment => enrollment.Id == userId).ToList();
+            var instructorCourses = _context.Courses.Where(teaching => teaching.InstructorID == userId).ToList();
+
+            var courseIDs = userEnrollments.Select(enrollment => enrollment.CourseID).ToList();
+            var taughtCourses = instructorCourses.Select(teaching => teaching.CourseID).ToList();
+
+            var courses = await _context.Courses
+                .Where(course => courseIDs.Contains(course.CourseID) || taughtCourses.Contains(course.CourseID) || User.IsInRole(StaticDetail.Role_Admin))
+                .Include(c => c.User)
+                .ToListAsync();
+
+            ViewData["Instructor"] = userId;
+            return View(courses);
         }
 
         // GET: Courses/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Courses == null)

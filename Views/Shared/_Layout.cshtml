@@ -22,9 +22,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
                         </li>
+                        }
                         @if (User.IsInRole(StaticDetail.Role_Admin))
                         {
                             <li class="nav-item dropdown">

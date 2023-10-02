@@ -6,11 +6,11 @@
 
 @*a*@
 
-<div class="card shadow border-0 mt-4"> 
+<div class="card shadow border-0 mt-4">
     <div class="card-body p-4">
         <div class="row pb-4">
             <div class="col-6">
-            <h2 class="text-black py-2">Courses</h2>
+                <h2 class="text-black py-2">Courses</h2>
             </div>
             <div class="col-6 text-end">
                 <a asp-controller="Courses" asp-action="Create" class="btn btn-outline-success">
@@ -21,60 +21,59 @@
 
         <table class="table table-bordered table-striped table-hover">
             <thead>
-
                 <tr>
-                <th>
-                @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.InstructorID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EnrollmentCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImageURL)
-                </th>
-                <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InstructorID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EnrollmentCount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImageURL)
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr class="table-info">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EnrollmentCount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ImageURL)
-                    </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnrollmentCount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImageURL)
+                        </td>
+                        <td style="width:20%">
                             <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm mx-2">
+                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm">
                                     <i class="bi bi-pencil-square"></i>Edit
                                 </a>
-                                <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm mx-2">
+                                <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-square"></i>Details
                                 </a>
-                                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-danger btn-sm mx-2">
+                                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-danger btn-sm">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </a>
                             </div>

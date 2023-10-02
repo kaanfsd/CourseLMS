@@ -3,51 +3,59 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit</h1>
-
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2">Edit User</h2>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            @* <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div> *@
-            @* <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
-                <select asp-for="Role" class="form-control">
-                    <option value="User">User</option>
-                    <option value="Instructor">Instructor</option>
-                    <option value="Admin">Admin</option>
-                </select>
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <input type="hidden" asp-for="Id" />
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="UserName" class="form-control border-0 shadow" />
+                    <label asp-for="UserName" class="text-black"></label>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Email" class="form-control border-0 shadow" />
+                    <label asp-for="Email" class="text-black"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                @* <div class="form-floating py-2 col-12">
+                    <input asp-for="Password" class="form-control border-0 shadow" />
+                    <label asp-for="Password" class="text-black"></label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="Role" class="form-control border-0 shadow">
+                        <option value="User">User</option>
+                        <option value="Instructor">Instructor</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <label asp-for="Role" class="text-black"></label>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div> *@
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-outline-success form-control text-black">Save</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Users" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                            Back to Users
+                        </a>
+                    </div>
+                </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

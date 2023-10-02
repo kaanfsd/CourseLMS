@@ -4,38 +4,47 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Enrollment</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2">Create a New Enrollment</h2>
             </div>
-            <div class="form-group">
-                <label asp-for="CourseID" class="control-label"></label>
-                <select asp-for="CourseID" class ="form-control" asp-items="ViewBag.CourseID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="EnrollmentDate" class="control-label"></label>
-                <input asp-for="EnrollmentDate" class="form-control" />
-                <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="Id" class="form-control border-0 shadow" asp-items="ViewBag.Id"></select>
+                    <label asp-for="Id" class="text-black"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="CourseID" class="form-control border-0 shadow" asp-items="ViewBag.CourseID"></select>
+                    <label asp-for="CourseID" class="text-black"></label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="EnrollmentDate" class="form-control border-0 shadow" />
+                    <label asp-for="EnrollmentDate" class="text-black"></label>
+                    <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-outline-success form-control text-black">Create</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Enrollments" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                            Back to Enrollments
+                        </a>
+                    </div>
+                </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
