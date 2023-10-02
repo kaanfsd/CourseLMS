@@ -4,11 +4,14 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Assignment</h4>
-    <hr />
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2">Assignment Details</h2>
+            </div>
+        </div>
+    </div>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CourseID)
@@ -36,7 +39,13 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.AssignmentID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="row pt-2">
+    <div class="col-6 col-md-3">
+        <a asp-action ="Edit" asp-route-id="@Model?.AssignmentID" class="btn btn-outline-success form-control text-black">Edit</a>
+    </div>
+    <div class="col-6 col-md-3">
+        <a asp-controller="Assignments" asp-action="Index" class="btn btn-outline-primary border  form-control">
+            Back to Assignments
+        </a>
+    </div>
 </div>
