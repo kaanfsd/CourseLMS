@@ -20,17 +20,17 @@ namespace CourseLMS.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasData(
-                new User { UserID=1, Username="Kaan", Role="Admin", Password="kaan123", Email="kaanfsd9@gmail.com"},
-                new User { UserID = 2, Username = "Ahmet", Role = "Instructor", Password = "ahmet123", Email = "ahmet@gmail.com" },
-                new User { UserID = 3, Username = "Mehmet", Role = "User", Password = "mehmet123", Email = "mehmet@gmail.com" }
-                );
+            //modelBuilder.Entity<User>().HasData(
+            //    new User { UserID=1, Username="Kaan", Role="Admin", Password="kaan123", Email="kaanfsd9@gmail.com"},
+            //    new User { UserID = 2, Username = "Ahmet", Role = "Instructor", Password = "ahmet123", Email = "ahmet@gmail.com" },
+            //    new User { UserID = 3, Username = "Mehmet", Role = "User", Password = "mehmet123", Email = "mehmet@gmail.com" }
+            //    );
 
 
             modelBuilder.Entity<Enrollment>()
             .HasOne(e => e.User)
             .WithMany(u => u.Enrollments)
-            .HasForeignKey(e => e.UserID)
+            .HasForeignKey(e => e.Id)
             .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Enrollment>()

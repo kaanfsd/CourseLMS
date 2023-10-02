@@ -22,37 +22,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        }
+                        @if (User.IsInRole(StaticDetail.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Content Managment
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
                                     <a class="dropdown-item text-dark" asp-controller="Users" asp-action="Index">Users</a>
-                                </li>
-                                <li class="nav-item">
+                                    </li>
+                                    <li class="nav-item">
                                     <a class="dropdown-item text-dark" asp-controller="Courses" asp-action="Index">Courses</a>
-                                </li>
-                                <li class="nav-item">
+                                    </li>
+                                    <li class="nav-item">
                                     <a class="dropdown-item text-dark" asp-controller="Assignments" asp-action="Index">Assignments</a>
-                                </li>
-                                <li class="nav-item">
+                                    </li>
+                                    <li class="nav-item">
                                     <a class="dropdown-item text-dark" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Register</a>
-                        </li>
-                    </ul>
+                    
+                        <partial name="_LoginPartial" />
+                    
                 </div>
             </div>
         </nav>
@@ -78,6 +79,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required:false)
 
 </html>

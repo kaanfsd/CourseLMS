@@ -1,26 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourseLMS.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserID { get; set; }
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int UserID { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string Surname { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+        //[Required]
+        //public string Password { get; set; }
 
-        [Required]
-        public string Role { get; set; }
+        //[Required]
+        //public string Role { get; set; }
 
         public User() { }
 

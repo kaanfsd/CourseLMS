@@ -11,10 +11,10 @@ namespace CourseLMS.Models
         public int EnrollmentID { get; set; }
 
         [Required]
-        [DisplayName("Username")]
-        public int? UserID { get; set; }
+        [DisplayName("UserName")]
+        public string? Id { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey("Id")]
         [InverseProperty("Enrollments")]
         public User? User { get; set; }
 

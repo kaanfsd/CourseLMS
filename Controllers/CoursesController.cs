@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CourseLMS.Controllers
 {
+    [Authorize]
     public class CoursesController : Controller
     {
         private readonly DatabaseContext _context;
@@ -21,11 +24,25 @@ namespace CourseLMS.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var databaseContext = _context.Courses.Include(c => c.User);
-            return View(await databaseContext.ToListAsync());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var userEnrollments = _context.Enrollments.Where(enrollment => enrollment.Id == userId).ToList();
+            var instructorCourses = _context.Courses.Where(teaching => teaching.InstructorID == userId).ToList();
+
+            var courseIDs = userEnrollments.Select(enrollment => enrollment.CourseID).ToList();
+            var taughtCourses = instructorCourses.Select(teaching => teaching.CourseID).ToList();
+
+            var courses = await _context.Courses
+                .Where(course => courseIDs.Contains(course.CourseID) || taughtCourses.Contains(course.CourseID) || User.IsInRole(StaticDetail.Role_Admin))
+                .Include(c => c.User)
+                .ToListAsync();
+
+            ViewData["Instructor"] = userId;
+            return View(courses);
         }
 
         // GET: Courses/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -45,9 +62,10 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize(Roles = StaticDetail.Role_Admin)]
         public IActionResult Create()
         {
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username");
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -56,6 +74,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = StaticDetail.Role_Admin)]
         public async Task<IActionResult> Create([Bind("CourseID,Title,Description,InstructorID,Category,EnrollmentCount,ImageURL")] Course course)
         {
             if (ModelState.IsValid)
@@ -64,11 +83,12 @@ namespace CourseLMS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username", course.InstructorID);
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Roles = StaticDetail.Role_Admin)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -81,7 +101,7 @@ namespace CourseLMS.Controllers
             {
                 return NotFound();
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username", course.InstructorID);
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
 
@@ -90,6 +110,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = StaticDetail.Role_Admin)]
         public async Task<IActionResult> Edit(int id, [Bind("CourseID,Title,Description,InstructorID,Category,EnrollmentCount,ImageURL")] Course course)
         {
             if (id != course.CourseID)
@@ -117,11 +138,12 @@ namespace CourseLMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "UserID", "Username", course.InstructorID);
+            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
 
         // GET: Courses/Delete/5
+        [Authorize(Roles = StaticDetail.Role_Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -143,6 +165,7 @@ namespace CourseLMS.Controllers
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = StaticDetail.Role_Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Courses == null)

@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CourseLMS.Controllers
 {
+    [Authorize(Roles = StaticDetail.Role_Admin)]
     public class AssignmentsController : Controller
     {
         private readonly DatabaseContext _context;

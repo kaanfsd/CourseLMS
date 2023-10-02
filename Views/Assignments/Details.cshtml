@@ -12,36 +12,36 @@
             </div>
         </div>
     </div>
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl class="card-body p-4">
+        <dt class="text-black">
             @Html.DisplayNameFor(model => model.CourseID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.Course.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="text-black">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="text-black">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="text-black">
             @Html.DisplayNameFor(model => model.DueDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.DueDate)
         </dd>
     </dl>
 </div>
 <div class="row pt-2">
     <div class="col-6 col-md-3">
-        <a asp-action ="Edit" asp-route-id="@Model?.AssignmentID" class="btn btn-outline-success form-control text-black">Edit</a>
+        <a asp-action="Edit" asp-route-id="@Model?.AssignmentID" class="btn btn-outline-success form-control text-black">Edit</a>
     </div>
     <div class="col-6 col-md-3">
         <a asp-controller="Assignments" asp-action="Index" class="btn btn-outline-primary border  form-control">

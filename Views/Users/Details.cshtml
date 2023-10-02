@@ -3,40 +3,48 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Username)
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-black py-2">User Details</h2>
+            </div>
+        </div>
+    </div>
+    <dl class="card-body p-4">
+        <dt class="text-black">
+            @Html.DisplayNameFor(model => model.UserName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Username)
+        <dd class="form-floating py-2 col-12">
+            @Html.DisplayFor(model => model.UserName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="text-black">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class = "col-sm-2">
+        @* <dt class="text-black">
             @Html.DisplayNameFor(model => model.Password)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.Password)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="text-black">
             @Html.DisplayNameFor(model => model.Role)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="form-floating py-2 col-12">
             @Html.DisplayFor(model => model.Role)
-        </dd>
+        </dd> *@
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.UserID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="row pt-2">
+    <div class="col-6 col-md-3">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-success form-control text-black">Edit</a>
+    </div>
+    <div class="col-6 col-md-3">
+        <a asp-controller="Users" asp-action="Index" class="btn btn-outline-primary border  form-control">
+            Back to Users
+        </a>
+    </div>
 </div>
