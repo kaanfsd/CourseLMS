@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DatabaseContextConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("ProjectDbContextConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseContextConnection' not found.");
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
@@ -13,7 +13,7 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DatabaseContext>(opts => {
-    opts.UseSqlServer(builder.Configuration["ConnectionStrings:DatabaseContextConnection"]);
+    opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProjectDbContextConnection"]);
 });
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
