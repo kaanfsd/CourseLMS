@@ -13,10 +13,13 @@ using Microsoft.EntityFrameworkCore;
 public class UsersController : Controller
 {
     private readonly UserManager<User> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public UsersController(UserManager<User> userManager)
+
+    public UsersController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     // GET: User/Index
@@ -29,13 +32,17 @@ public class UsersController : Controller
     // GET: User/Create
     public IActionResult Create()
     {
+        // Provide a list of available roles to the view
+        var roles = _roleManager.Roles.ToList();
+        ViewBag.Roles = new SelectList(roles, "Name", "Name");
+
         return View();
     }
 
     // POST: User/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(string email, string password)
+    public async Task<IActionResult> Create(string email, string password, string roleName)
     {
         if (ModelState.IsValid)
         {
@@ -49,6 +56,12 @@ public class UsersController : Controller
 
             if (result.Succeeded)
             {
+                // Check if the role exists before adding the user to it
+                var roleExists = await _roleManager.RoleExistsAsync(roleName);
+                if (roleExists)
+                {
+                    await _userManager.AddToRoleAsync(user, roleName);
+                }
                 // User creation successful
                 return RedirectToAction("Index");
             }
@@ -58,6 +71,10 @@ public class UsersController : Controller
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
+        // Provide a list of available roles to the view
+        var roles = _roleManager.Roles.ToList();
+        ViewBag.Roles = new SelectList(roles, "Name", "Name");
 
         return View();
     }
