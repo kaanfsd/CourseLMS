@@ -1,162 +1,154 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
+using CourseLMS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CourseLMS.Models;
 
-namespace CourseLMS.Controllers
+public class UsersController : Controller
 {
-    public class UsersController : Controller
+    private readonly UserManager<User> _userManager;
+
+    public UsersController(UserManager<User> userManager)
     {
-        private readonly DatabaseContext _context;
+        _userManager = userManager;
+    }
 
-        public UsersController(DatabaseContext context)
+    // GET: User/Index
+    public async Task<IActionResult> Index()
+    {
+        var users = _userManager.Users.ToList();
+        return View(users);
+    }
+
+    // GET: User/Create
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: User/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(string email, string password)
+    {
+        if (ModelState.IsValid)
         {
-            _context = context;
+            var user = new User
+            {
+                UserName = email,
+                Email = email
+            };
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                // User creation successful
+                return RedirectToAction("Index");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+        return View();
+    }
+
+    // GET: User/Edit/{id}
+    public async Task<IActionResult> Edit(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
         {
-              return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
-                          Problem("Entity set 'DatabaseContext.Users'  is null.");
+            return NotFound();
         }
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(string? id)
+        return View(user);
+    }
+
+    // POST: User/Edit/{id}
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(string id, string email)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
         {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id.Equals(id));
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
+            return NotFound();
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
+        user.Email = email;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
         {
-            return View();
+            return RedirectToAction("Index");
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password,Role")] User user)
+        foreach (var error in result.Errors)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+            ModelState.AddModelError(string.Empty, error.Description);
         }
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(string? id)
-        {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
+        return View(user);
+    }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+    // GET: User/Delete/{id}
+    public async Task<IActionResult> Delete(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,Password,Role")] User user)
-        {
-            if (!id.Equals(user.Id))
-            {
-                return NotFound();
-            }
+        return View(user);
+    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+    // POST: User/Delete/{id}
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
         }
 
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(string? id)
+        var result = await _userManager.DeleteAsync(user);
+
+        if (result.Succeeded)
         {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id.Equals(id));
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
+            return RedirectToAction("Index");
         }
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        foreach (var error in result.Errors)
         {
-            if (_context.Users == null)
-            {
-                return Problem("Entity set 'DatabaseContext.Users'  is null.");
-            }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ModelState.AddModelError(string.Empty, error.Description);
         }
 
-        private bool UserExists(string id)
+        return View(user);
+    }
+
+    // GET: User/Details/{id}
+    public async Task<IActionResult> Details(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
         {
-          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return NotFound();
         }
+
+        return View(user);
     }
 }

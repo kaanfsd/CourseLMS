@@ -1,71 +1,27 @@
-﻿@model IEnumerable<CourseLMS.Models.User>
+﻿@model List<User>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<h1>User List</h1>
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-body p-4">
-        <div class="row pb-4">
-            <div class="col-6">
-                <h2 class="text-black py-2">Users</h2>
-            </div>
-            <div class="col-6 text-end">
-                <a asp-controller="Users" asp-action="Create" class="btn btn-outline-success">
-                    <i class="bi bi-plus-circle "></i> Create New User
-                </a>
-            </div>
-        </div>
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.Password )
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Role)
-                    </th> *@
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="table-info">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        @* <td>
-                            @Html.DisplayFor(modelItem => item.Password)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Role)
-                        </td> *@
-                        <td style="width:20%">
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-pencil-square"></i>Edit
-                                </a>
-                                <a asp-controller="Users" asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil-square"></i>Details
-                                </a>
-                                <a asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
