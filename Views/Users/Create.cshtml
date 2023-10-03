@@ -1,8 +1,10 @@
-﻿@model User
+﻿@{
+    ViewData["Title"] = "Create User";
+}
 
 <h1>Create User</h1>
 
-<form asp-action="Create">
+<form asp-action="Create" method="post">
     <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="email" name="email" required>
@@ -11,5 +13,16 @@
         <label for="password">Password:</label>
         <input type="password" class="form-control" id="password" name="password" required>
     </div>
+    <div class="form-group">
+        <label for="role">Role:</label>
+        <select class="form-control" id="role" name="roleName">
+            @foreach (var role in ViewBag.Roles)
+            {
+                <option value="@role.Value">@role.Text</option>
+            }
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
+
+<a asp-action="Index">Back to List</a>

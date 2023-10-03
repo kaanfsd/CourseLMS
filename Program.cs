@@ -18,7 +18,7 @@ builder.Services.AddDbContext<DatabaseContext>(opts => {
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProjectDbContextConnection"]);
 });
 
-builder.Services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
