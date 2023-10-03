@@ -94,13 +94,9 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EnrollmentID,Id,CourseID,EnrollmentDate")] Enrollment enrollment)
+        public async Task<IActionResult> Edit([Bind("EnrollmentID,Id,CourseID,EnrollmentDate")] Enrollment enrollment)
         {
-            if (id != enrollment.EnrollmentID)
-            {
-                return NotFound();
-            }
-
+            
             if (ModelState.IsValid)
             {
                 try
@@ -122,7 +118,7 @@ namespace CourseLMS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title", enrollment.CourseID);
-            ViewData["Id"] = new SelectList(_context.Users, "Id", "UserName", enrollment.Id);
+            //ViewData["Id"] = new SelectList(_context.Users, "Id", "UserName", enrollment.Id);
             return View(enrollment);
         }
 

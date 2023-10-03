@@ -22,7 +22,15 @@
             }
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <div class="row pt-2">
+        <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-outline-success form-control text-black">Create</button>
+        </div>
+        <div class="col-6 col-md-3">
+            <a asp-controller="Assignments" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                Back to Assignments
+            </a>
+        </div>
+    </div>
 </form>
 
-<a asp-action="Index">Back to List</a>
