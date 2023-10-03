@@ -66,15 +66,15 @@
                             @Html.DisplayFor(modelItem => item.ImageURL)
                         </td>
                         <td style="width:20%">
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-pencil-square"></i>Edit
+                            <div class="btn-group" role="group">
+                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm" >
+                                Edit <i class="bi bi-pencil-square" style="font-size: 10px;"></i>
                                 </a>
                                 <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil-square"></i>Details
+                                Details <i class="bi bi-info-circle-fill" style="font-size: 10px;"></i>
                                 </a>
                                 <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-trash-fill"></i> Delete
+                                Delete <i class="bi bi-trash-fill" style="font-size: 10px;"></i>
                                 </a>
                             </div>
                         </td>
