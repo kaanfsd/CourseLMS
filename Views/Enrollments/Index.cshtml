@@ -49,13 +49,19 @@
                         <td style="width:20%">
                             <div class="btn-group" role="group">
                                 <a asp-controller="Enrollments" asp-action="Edit" asp-route-id="@item.EnrollmentID" class="btn btn-primary btn-sm">
-                                Edit <i class="bi bi-pencil-square" style="font-size: 10px;"></i>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-pencil-square" style="font-size: 10px;"></i> &nbsp;Edit
+                                    </div>
                                 </a>
                                 <a asp-controller="Enrollments" asp-action="Details" asp-route-id="@item.EnrollmentID" class="btn btn-warning btn-sm">
-                                Details <i class="bi bi-info-circle-fill" style="font-size: 10px;"></i>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-info-circle-fill" style="font-size: 10px;"></i> &nbsp;Details
+                                    </div>
                                 </a>
                                 <a asp-controller="Enrollments" asp-action="Delete" asp-route-id="@item.EnrollmentID" class="btn btn-danger btn-sm">
-                                Delete <i class="bi bi-trash-fill" style="font-size: 10px;"></i>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-trash-fill" style="font-size: 10px;"></i> &nbsp;Delete
+                                    </div>
                                 </a>
                             </div>
                         </td>
