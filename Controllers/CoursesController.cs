@@ -9,6 +9,8 @@ using CourseLMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
+using OfficeOpenXml;
 
 namespace CourseLMS.Controllers
 {
@@ -211,6 +213,49 @@ namespace CourseLMS.Controllers
         private bool CourseExists(int id)
         {
           return (_context.Courses?.Any(e => e.CourseID == id)).GetValueOrDefault();
+        }
+        [HttpGet]
+        [Authorize(Roles = StaticDetail.Role_Admin)]
+        public async Task<IActionResult> ExportExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var stream = new MemoryStream();
+            // Get the users from the database.
+            var courses = await _context.Courses.ToListAsync();
+
+            // Create an Excel file.
+            using (var excelPackage = new ExcelPackage(stream))
+            {
+                // Add a worksheet to the Excel file.
+                var worksheet = excelPackage.Workbook.Worksheets.Add("Courses");
+
+                worksheet.Cells["A1"].Value = "Title";
+                worksheet.Cells["B1"].Value = "Description";
+                worksheet.Cells["C1"].Value = "Instructor";
+                worksheet.Cells["D1"].Value = "Category";
+                worksheet.Cells["E1"].Value = "Enrollment limit";
+                worksheet.Cells["F1"].Value = "Image Url";
+
+                int row = 2;
+                foreach (var cours in courses)
+                {
+                    worksheet.Cells[row, 1].Value = cours.Title;
+                    worksheet.Cells[row, 2].Value = cours.Description;
+                    worksheet.Cells[row, 3].Value = cours.InstructorID;
+                    worksheet.Cells[row, 4].Value = cours.Category;
+                    worksheet.Cells[row, 5].Value = cours.EnrollmentCount;
+                    worksheet.Cells[row, 6].Value = cours.ImageURL;
+                    row++;
+                }
+
+                // Save the Excel file.
+                excelPackage.SaveAs("courses.xlsx");
+            }
+
+            stream.Position = 0;
+            string excelName = "CoursesRecord.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
     }
 }
