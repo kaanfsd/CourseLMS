@@ -24,9 +24,23 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Assignments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+
+            var assignments = from a in _context.Assignments
+                              select a;
+
             var databaseContext = _context.Assignments.Include(a => a.Course);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filteredDbContext = _context.Assignments.Include(a => a.Course).Where(a => a.Title!.Contains(searchString));
+
+                return View(await filteredDbContext.ToListAsync());
+                //assignments = assignments.Where(s => s.Title!.Contains(searchString));
+                //return View(assignments);
+            }
+
+            //var databaseContext = _context.Assignments.Include(a => a.Course);
             return View(await databaseContext.ToListAsync());
         }
 

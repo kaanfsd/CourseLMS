@@ -4,6 +4,12 @@
     ViewData["Title"] = "Index";
 
 }
+<form asp-controller="Assignments" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="SearchString" placeholder="Type assignment" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
 
 <div class="card shadow border-0 mt-4">
     <div class="card-body p-4">
@@ -22,10 +28,10 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.CourseID)
+                        @Html.DisplayNameFor(model => model.Title)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Title)
+                        @Html.DisplayNameFor(model => model.CourseID)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Description)
@@ -42,10 +48,10 @@
                 {
                     <tr class="table-info">
                         <td>
-                            @Html.DisplayFor(modelItem => item.Course.Title)
+                            @Html.DisplayFor(modelItem => item.Title)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Title)
+                            @Html.DisplayFor(modelItem => item.Course.Title)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
@@ -76,7 +82,7 @@
                 }
             </tbody>
         </table>
-        </table>
+        
         @if (User.IsInRole(StaticDetail.Role_Admin))
         {
             <form>
