@@ -53,6 +53,8 @@ namespace CourseLMS.Controllers
         
         public async Task<IActionResult> Details(int? id)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             if (id == null || _context.Courses == null)
             {
                 return NotFound();
@@ -65,6 +67,14 @@ namespace CourseLMS.Controllers
             {
                 return NotFound();
             }
+            // Retrieve assignments related to the course
+            var CourseAssignments = await _context.Assignments
+                .Where(assignment => assignment.CourseID == id)
+                .ToListAsync();
+
+            // Pass assignments to the view
+            ViewData["Assignments"] = CourseAssignments;
+            ViewData["Instructor"] = userId;
 
             return View(course);
         }
