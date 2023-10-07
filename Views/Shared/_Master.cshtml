@@ -28,33 +28,41 @@
                     <span class="oi oi-menu"></span> Menu
                 </button>
                 <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a asp-controller="Courses" asp-action="Index" class="nav-link">Course</a></li>
-                        @*<li class="nav-item"><a href="instructor.html" class="nav-link">Instructor</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>*@
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Content Managment
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="dropdown-item text-dark" asp-controller="Users" asp-action="Index">Users</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item text-dark" asp-controller="Courses" asp-action="Index">Courses</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item text-dark" asp-controller="Assignments" asp-action="Index">Assignments</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item text-dark" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
-                                </li>
-                            </ul>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(StaticDetail.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Content Managment
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Users" asp-action="Index">Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Courses" asp-action="Index">Courses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Assignments" asp-action="Index">Assignments</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
 
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
