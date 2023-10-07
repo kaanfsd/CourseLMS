@@ -16,8 +16,15 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<DatabaseContext>(opts => {
+builder.Services.AddDbContext<DatabaseContext>(opts =>
+{
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProjectDbContextConnection"]);
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOrInstructor", policy =>
+          policy.RequireRole("Admin", "Instructor"));
 });
 
 builder.Services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)

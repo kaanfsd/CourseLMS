@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CourseLMS.Controllers
 {
-    [Authorize(Roles = StaticDetail.Role_Admin)]
+    //[Authorize(Roles = StaticDetail.Role_Admin)]
+    [Authorize(Policy ="AdminOrInstructor")]
     public class AssignmentsController : Controller
     {
         private readonly DatabaseContext _context;
