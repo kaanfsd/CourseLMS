@@ -23,19 +23,46 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><span>Study</span>Lab</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span>Study</span>Lab</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
                 <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                        <li class="nav-item active"><a href="course.html" class="nav-link">Course</a></li>
-                        <li class="nav-item"><a href="instructor.html" class="nav-link">Instructor</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
+                            </li>
+                        }
+                        @if (User.IsInRole(StaticDetail.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Content Managment
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Users" asp-action="Index">Users</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Courses" asp-action="Index">Courses</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Assignments" asp-action="Index">Assignments</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
+
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -46,7 +73,7 @@
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 ftco-animate pb-5 text-center">
                         <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Course Lists <i class="fa fa-chevron-right"></i></span></p>
-                        <h1 class="mb-0 bread">Course Lists</h1>
+                        <h1 class="mb-0 bread">Welcome CourseLMS</h1>
                     </div>
                 </div>
             </div>
