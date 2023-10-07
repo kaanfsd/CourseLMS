@@ -61,3 +61,22 @@
         </a>
     </div>
 </div>
+<div>
+    <!-- Display assignments -->
+    <h3>Assignments for this Course:</h3>
+    <ul>
+        @foreach (var assignment in (List<Assignment>)ViewData["Assignments"])
+        {
+            <li>@assignment.Title</li>
+        }
+    </ul>
+</div>
+<div>
+    @if (ViewData["UserRole"] != null && (string)ViewData["UserRole"] == "Admin" || (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @Model.InstructorID))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.CourseID">Edit</a>
+
+    }
+
+    <a asp-action="Index">Back to List</a>
+</div>
