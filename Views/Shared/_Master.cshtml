@@ -20,10 +20,28 @@
     <script nonce="efaf640b-3b35-422f-814e-8857290a7b91">(function (w, d) { !function (a, b, c, d) { a[c] = a[c] || {}; a[c].executed = []; a.zaraz = { deferred: [], listeners: [] }; a.zaraz.q = []; a.zaraz._f = function (e) { return async function () { var f = Array.prototype.slice.call(arguments); a.zaraz.q.push({ m: e, a: f }) } }; for (const g of ["track", "set", "debug"]) a.zaraz[g] = a.zaraz._f(g); a.zaraz.init = () => { var h = b.getElementsByTagName(d)[0], i = b.createElement(d), j = b.getElementsByTagName("title")[0]; j && (a[c].t = b.getElementsByTagName("title")[0].text); a[c].x = Math.random(); a[c].w = a.screen.width; a[c].h = a.screen.height; a[c].j = a.innerHeight; a[c].e = a.innerWidth; a[c].l = a.location.href; a[c].r = b.referrer; a[c].k = a.screen.colorDepth; a[c].n = b.characterSet; a[c].o = (new Date).getTimezoneOffset(); if (a.dataLayer) for (const n of Object.entries(Object.entries(dataLayer).reduce(((o, p) => ({ ...o[1], ...p[1] })), {}))) zaraz.set(n[0], n[1], { scope: "page" }); a[c].q = []; for (; a.zaraz.q.length;) { const q = a.zaraz.q.shift(); a[c].q.push(q) } i.defer = !0; for (const r of [localStorage, sessionStorage]) Object.keys(r || {}).filter((t => t.startsWith("_zaraz_"))).forEach((s => { try { a[c]["z_" + s.slice(7)] = JSON.parse(r.getItem(s)) } catch { a[c]["z_" + s.slice(7)] = r.getItem(s) } })); i.referrerPolicy = "origin"; i.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(a[c]))); h.parentNode.insertBefore(i, h) };["complete", "interactive"].includes(b.readyState) ? zaraz.init() : a.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
 </head>
 <body>
+    @{
+        string[] educationQuotes = new string[]
+            {
+    "Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
+    "The more that you read, the more things you will know. The more that you learn, the more places you'll go. - Dr. Seuss",
+    "Education is not the filling of a pail, but the lighting of a fire. - William Butler Yeats",
+    "The beautiful thing about learning is that no one can take it away from you. - B.B. King",
+    "An investment in knowledge pays the best interest. - Benjamin Franklin",
+    "Education is the foundation upon which we build our future. - Christine Gregoire",
+    "The roots of education are bitter, but the fruit is sweet. - Aristotle",
+    "The mind is not a vessel to be filled, but a fire to be kindled. - Plutarch",
+    "The only thing that interferes with my learning is my education. - Albert Einstein",
+    "Education is the key to unlock the golden door of freedom. - George Washington Carver"
+            };
+        Random random = new Random();
+        int randomIndex = random.Next(0, 10);
+    }
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span>Study</span>Lab</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span>Course</span>LMS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
@@ -87,14 +105,21 @@
         </nav>
 
         <section class="hero-wrap hero-wrap-2" style="background-image: url('@Url.Content("~/images/bg_2.jpg")');">
+            <figure  class="text-center mb-4 text-black" style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">
+                <blockquote class="blockquote mb-4">
+                    <p>
+                        <span class="font-italic ">
+                            @educationQuotes[randomIndex]
+                        </span>
+                    </p>
+                </blockquote>
+            </figure>
             <div class="overlay"></div>
             <div class="container">
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
-                    <div class="col-md-9 ftco-animate pb-5 text-center">
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Course Lists <i class="fa fa-chevron-right"></i></span></p>
-                        <h1 class="mb-0 bread">Welcome CourseLMS</h1>
-                    </div>
+
                 </div>
+
             </div>
         </section>
     </header>
