@@ -21,9 +21,20 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Enrollments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            var enrollments = from e in _context.Enrollments
+                              select e;
+
             var databaseContext = _context.Enrollments.Include(e => e.Course).Include(e => e.User);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filteredDbContext = _context.Enrollments.Include(e => e.Course).Include(e => e.User).Where(e => e.Course.Title!.Contains(searchString));
+                return View(await filteredDbContext.ToListAsync());
+            }
+
+
             return View(await databaseContext.ToListAsync());
         }
 

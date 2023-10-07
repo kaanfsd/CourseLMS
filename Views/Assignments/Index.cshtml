@@ -4,12 +4,16 @@
     ViewData["Title"] = "Index";
 
 }
-<form asp-controller="Assignments" asp-action="Index" method="get">
-    <p>
-        Title: <input type="text" name="SearchString" placeholder="Type assignment" />
-        <input type="submit" value="Search" />
-    </p>
+<form asp-controller="Assignments" asp-action="Index" method="get" style="text-align: center; margin-top: 20px;">
+    <div style="display: inline-block;">
+        <label for="SearchString" style="font-weight: bold;">Title:</label>
+        <input type="text" id="SearchString" name="SearchString" placeholder="Type assignment" style="margin-right: 10px; padding: 5px;" />
+    </div>
+    <div style="display: inline-block;">
+        <input type="submit" value="Search" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; cursor: pointer;" />
+    </div>
 </form>
+
 
 <div class="card shadow border-0 mt-4">
     <div class="card-body p-4">

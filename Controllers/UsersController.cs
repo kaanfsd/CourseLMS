@@ -25,9 +25,22 @@ public class UsersController : Controller
     }
 
     // GET: User/Index
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string searchString)
     {
+        var _users = from u in _userManager.Users
+                          select u;
+
         var users = _userManager.Users.ToList();
+        
+        if(!String.IsNullOrEmpty(searchString))
+        {
+            var filteredDbContext = _userManager.Users.Where(u => u.Email!.Contains(searchString));
+
+            return View(await filteredDbContext.ToListAsync());
+
+        }
+
+
         return View(users);
     }
 

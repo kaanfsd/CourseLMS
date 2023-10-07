@@ -30,20 +30,32 @@ namespace CourseLMS.Controllers
 
         // GET: Courses
         
-        public async Task<IActionResult> Index()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        public async Task<IActionResult> Index(string searchString)
+        { 
+            var _courses= from c in _context.Courses
+                              select c;
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userEnrollments = _context.Enrollments.Where(enrollment => enrollment.Id == userId).ToList();
             var instructorCourses = _context.Courses.Where(teaching => teaching.InstructorID == userId).ToList();
-
             var courseIDs = userEnrollments.Select(enrollment => enrollment.CourseID).ToList();
             var taughtCourses = instructorCourses.Select(teaching => teaching.CourseID).ToList();
-
             var courses = await _context.Courses
                 .Where(course => courseIDs.Contains(course.CourseID) || taughtCourses.Contains(course.CourseID) || User.IsInRole(StaticDetail.Role_Admin))
                 .Include(c => c.User)
                 .ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filteredDbContext = await _context.Courses
+                .Where(course => courseIDs.Contains(course.CourseID) || taughtCourses.Contains(course.CourseID) || User.IsInRole(StaticDetail.Role_Admin))
+                .Where(c => c.Title!.Contains(searchString))
+                .Include(c => c.User).ToListAsync();
+
+                return View(filteredDbContext);
+
+            }
+            
             ViewData["Instructor"] = userId;
 
             return View(courses);
