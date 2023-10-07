@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using OfficeOpenXml;
 
 public class UsersController : Controller
 {
@@ -167,5 +169,43 @@ public class UsersController : Controller
         }
 
         return View(user);
+    }
+    [HttpGet]
+    [Authorize(Roles = StaticDetail.Role_Admin)]
+    public async Task<IActionResult> ExportExcel()
+    {
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+        var stream = new MemoryStream();
+        // Get the users from the database.
+        var users = await _userManager.Users.ToListAsync();
+
+        // Create an Excel file.
+        using (var excelPackage = new ExcelPackage(stream))
+        {
+            // Add a worksheet to the Excel file.
+            var worksheet = excelPackage.Workbook.Worksheets.Add("Users");
+
+            worksheet.Cells["A1"].Value = "First Name";
+            worksheet.Cells["B1"].Value = "Last Name";
+            worksheet.Cells["C1"].Value = "E-mail";
+            //worksheet.Cells["A1"].Value = user.Name;
+            //worksheet.Cells["A2"].Value = user.Surname;
+            int row = 2;
+            foreach (var user in users)
+            {
+                //worksheet.Cells[row, 1].Value = user.Name;
+                //worksheet.Cells[row, 2].Value = user.Surname;
+                worksheet.Cells[row, 3].Value = user.Email;
+                row++;
+            }
+
+            // Save the Excel file.
+            excelPackage.SaveAs("users.xlsx");
+        }
+
+        stream.Position = 0;
+        string excelName = "UsersRecord.xlsx";
+        return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
     }
 }
