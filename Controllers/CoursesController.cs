@@ -72,8 +72,16 @@ namespace CourseLMS.Controllers
         [Authorize(Policy = "AdminOrInstructor")]
         public IActionResult Create()
         {
+            var instructors = _userManager.GetUsersInRoleAsync(StaticDetail.Role_Instructor).Result.ToList();
+            string userId = _userManager.GetUserId(User);
+            if (User.IsInRole(StaticDetail.Role_Instructor))
+            { ViewData["InstructorID"] = new SelectList(_context.Users.Where(i => i.Id == userId), "Id", "UserName"); }
+            if (User.IsInRole(StaticDetail.Role_Admin))
+            {
+                ViewData["Instructors"] = new SelectList(instructors, "Id", "UserName");
+            }
 
-            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName");
+            //ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 

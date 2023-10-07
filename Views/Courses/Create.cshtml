@@ -27,13 +27,13 @@
                     <label asp-for="Description" class="text-black"></label>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                 <div class="form-floating py-2 col-12">
+                @*  <div class="form-floating py-2 col-12">
                     <select asp-for="InstructorID" class="form-control border-0 shadow" asp-items="ViewBag.InstructorID"></select>
                     <label asp-for="InstructorID" class="text-black"></label>
                     <span asp-validation-for="InstructorID" class="text-danger"></span>
-                </div> 
+                </div> *@ 
 
-                @* @if (User.IsInRole(StaticDetail.Role_Instructor))
+                @if (User.IsInRole(StaticDetail.Role_Instructor))
                 {
                     <div class="form-floating py-2 col-12">
                         <select selected asp-for="InstructorID" class="form-control border-0 shadow" asp-items="ViewBag.InstructorID"></select>
@@ -48,7 +48,7 @@
                         <label asp-for="InstructorID" class="text-black"></label>
                         <span asp-validation-for="InstructorID" class="text-danger"></span>
                     </div>
-                } *@
+                }
 
 
                 <div class="form-floating py-2 col-12">
