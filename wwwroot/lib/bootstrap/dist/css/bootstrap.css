@@ -196,6 +196,10 @@
     box-sizing: border-box;
 }
 
+.carousel-indicators li.active {
+    background-color: black; /* Arka plan rengini siyah yapar */
+}
+
 @media (prefers-reduced-motion: no-preference) {
     :root {
         scroll-behavior: smooth;

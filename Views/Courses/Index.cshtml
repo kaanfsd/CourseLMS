@@ -4,87 +4,134 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-body p-4">
-        <div class="row pb-4">
-            <div class="col-6">
-                <h2 class="text-black py-2">Courses</h2>
-            </div>
-            <div class="col-6 text-end">
-                <a asp-controller="Courses" asp-action="Create" class="btn btn-primary btn-sm">
-                    <i class="bi bi-plus-circle "></i> Create New Course
-                </a>
+        @if (!User.IsInRole(StaticDetail.Role_Student))
+        {
+        <div class="card shadow border-0 mt-4">
+            <div class="card-body p-4">
+                <div class="row pb-4">
+                    <div class="col-6">
+                        <h2 class="text-black py-2">Courses</h2>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a asp-controller="Courses" asp-action="Create" class="btn btn-primary btn-sm">
+                            <i class="bi bi-plus-circle "></i> Create New Course
+                        </a>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.InstructorID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EnrollmentCount)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table-info">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EnrollmentCount)
+                                </td>
+                                <td style="width:20%">
+                                    <div class="btn-group" role="group">
+                                        <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-pencil-square" style="font-size: 10px;"></i> &nbsp;Edit
+                                            </div>
+                                        </a>
+                                        <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-warning btn-sm">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-info-circle-fill" style="font-size: 10px;"></i> &nbsp;Details
+                                            </div>
+                                        </a>
+                                        <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-danger btn-sm">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-trash-fill" style="font-size: 10px;"></i> &nbsp;Delete
+                                            </div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Title)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.InstructorID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Category)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.EnrollmentCount)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ImageURL)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="table-info">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.UserName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Category)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EnrollmentCount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ImageURL)
-                        </td>
-                        <td style="width:20%">
-                            <div class="btn-group" role="group">
-                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@item.CourseID" class="btn btn-primary btn-sm">
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-pencil-square" style="font-size: 10px;"></i> &nbsp;Edit
-                                    </div>
-                                </a>
-                                <a asp-controller="Courses" asp-action="Details" asp-route-id="@item.CourseID" class="btn btn-warning btn-sm">
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-info-circle-fill" style="font-size: 10px;"></i> &nbsp;Details
-                                    </div>
-                                </a>
-                                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseID" class="btn btn-danger btn-sm">
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-trash-fill" style="font-size: 10px;"></i> &nbsp;Delete
-                                    </div>
-                                </a>
+        }
+        else
+        {
+                <div class="card shadow border-0 mt-4">
+                    <div class="card-body p-4">
+                        <div class="row pb-4">
+                            <div class="col-6">
+                                <h2 class="text-black py-2">Courses</h2>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+            <div class="row pb-3">
+                @foreach (var course in Model)
+                {
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="row p-2">
+                            <div class="col-12 p-1">
+                                <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                                    <img src="@course.ImageURL" class="card-img-top rounded" />
+                                    <div class="card-body pb-0">
+                                        <div class="pl-1">
+                                            <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@course.Title</p>
+                                            <p class="card-title text-warning text-center"><b>Instructor: @course.User.UserName</b></p>
+                                        </div>
+                                        <p>@course.Description</p>
+                                    </div>
+
+                                    <div class="w-75 btn-group" role="group">
+                                        @if (ViewData["UserRole"] != null && ((string)ViewData["UserRole"] == "Instructor" && (string)ViewData["Instructor"] == @course.InstructorID))
+                                        {
+                                            <a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.CourseID" class="btn btn-primary btn-sm mx-2">
+                                                <i class="bi bi-pencil-square"></i>Edit
+                                            </a>
+                                            <a asp-controller="Courses" asp-action="Delete" asp-route-id="@course.CourseID" class="btn btn-danger btn-sm mx-2">
+                                                <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        }
+                                        <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.CourseID" class="btn btn-primary btn-sm mx-2">
+                                            <i class="bi bi-pencil-square"></i>Details
+                                        </a>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
-            </tbody>
-        </table>
-    </div>
-</div>
+            </div>
+            </div>
+            </div>
+        }
+        

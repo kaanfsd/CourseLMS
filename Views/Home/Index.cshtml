@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<CourseLMS.Models.Course>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -47,6 +49,45 @@
     </div>
 </div>
 <div class="row pb-3">
+    @foreach (var course in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        <img src="@course.ImageURL" class="card-img-top rounded" />
+                        <div class="card-body pb-0">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@course.Title</p>
+                                <p class="card-title text-warning text-center"><b>Instructor: @course.User.UserName</b></p>
+                            </div>
+                            <p>@course.Description</p>
+                        </div>
+
+                        <div class="w-75 btn-group" role="group">
+                            @if (ViewData["UserRole"] != null && ((string)ViewData["UserRole"] == "Instructor" && (string)ViewData["Instructor"] == @course.InstructorID))
+                            {
+                                <a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.CourseID" class="btn btn-primary btn-sm mx-2">
+                                    <i class="bi bi-pencil-square"></i>Edit
+                                </a>
+                                <a asp-controller="Courses" asp-action="Delete" asp-route-id="@course.CourseID" class="btn btn-danger btn-sm mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </a>
+                            }
+                            <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.CourseID" class="btn btn-primary btn-sm mx-2">
+                                <i class="bi bi-pencil-square"></i>Details
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@*
+<div class="row pb-3">
     <div class="col-lg-3 col-sm-6">
         <div class="row p-2">
             <div class="col-12 p-1">
@@ -78,7 +119,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
     <div class="col-lg-3 col-sm-6">
         <div class="row p-2">
             <div class="col-12 p-1">
@@ -162,5 +203,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 </div>

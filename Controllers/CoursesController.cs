@@ -43,8 +43,8 @@ namespace CourseLMS.Controllers
                 .Where(course => courseIDs.Contains(course.CourseID) || taughtCourses.Contains(course.CourseID) || User.IsInRole(StaticDetail.Role_Admin))
                 .Include(c => c.User)
                 .ToListAsync();
-
             ViewData["Instructor"] = userId;
+
             return View(courses);
         }
 
