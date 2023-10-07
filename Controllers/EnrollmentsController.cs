@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
+using Microsoft.AspNetCore.Authorization;
+using OfficeOpenXml;
 
 namespace CourseLMS.Controllers
 {
@@ -164,6 +166,42 @@ namespace CourseLMS.Controllers
         private bool EnrollmentExists(int id)
         {
           return (_context.Enrollments?.Any(e => e.EnrollmentID == id)).GetValueOrDefault();
+        }
+        [HttpGet]
+        [Authorize(Roles = StaticDetail.Role_Admin)]
+        public async Task<IActionResult> ExportExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var stream = new MemoryStream();
+            // Get the users from the database.
+            var enrollments = await _context.Enrollments.ToListAsync();
+
+            // Create an Excel file.
+            using (var excelPackage = new ExcelPackage(stream))
+            {
+                // Add a worksheet to the Excel file.
+                var worksheet = excelPackage.Workbook.Worksheets.Add("Enrollments");
+
+                worksheet.Cells["A1"].Value = "UserName";
+                worksheet.Cells["B1"].Value = "Course Title";
+                worksheet.Cells["C1"].Value = "Enrollment Date";
+
+                int row = 2;
+                foreach (var enrollment in enrollments)
+                {
+                    worksheet.Cells[row, 1].Value = enrollment.Id;
+                    worksheet.Cells[row, 2].Value = enrollment.CourseID;
+                    worksheet.Cells[row, 3].Value = enrollment.EnrollmentDate.Day.ToString() + "/" + enrollment.EnrollmentDate.Month.ToString() + "/" + enrollment.EnrollmentDate.Year.ToString();
+                    row++;
+                }
+
+                // Save the Excel file.
+                excelPackage.SaveAs("enrollment.xlsx");
+                stream.Position = 0;
+                string excelName = "EnrollmentsRecord.xlsx";
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+            }
         }
     }
 }

@@ -51,5 +51,12 @@
         }
     </tbody>
 </table>
+        @if (User.IsInRole(StaticDetail.Role_Admin))
+        {
+            <form>
+
+                <input type="submit" asp-controller="Users" asp-action="ExportExcel" class="btn btn-primary btn-sm" value="Export" />
+            </form>
+        }
 </div>
 </div>

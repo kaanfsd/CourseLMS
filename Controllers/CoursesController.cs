@@ -9,7 +9,6 @@ using CourseLMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel;
 using OfficeOpenXml;
 
 namespace CourseLMS.Controllers

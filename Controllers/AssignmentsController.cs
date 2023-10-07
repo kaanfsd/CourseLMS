@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using OfficeOpenXml;
 
 namespace CourseLMS.Controllers
 {
@@ -165,6 +167,46 @@ namespace CourseLMS.Controllers
         private bool AssignmentExists(int id)
         {
           return (_context.Assignments?.Any(e => e.AssignmentID == id)).GetValueOrDefault();
+        }
+        [HttpGet]
+        [Authorize(Roles = StaticDetail.Role_Admin)]
+        public async Task<IActionResult> ExportExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var stream = new MemoryStream();
+            // Get the users from the database.
+            var assignments = await _context.Assignments.ToListAsync();
+
+            // Create an Excel file.
+            using (var excelPackage = new ExcelPackage(stream))
+            {
+                // Add a worksheet to the Excel file.
+                var worksheet = excelPackage.Workbook.Worksheets.Add("Assignments");
+
+                worksheet.Cells["A1"].Value = "Course Title";
+                worksheet.Cells["B1"].Value = "Assignment Title";
+                worksheet.Cells["C1"].Value = "Description";
+                worksheet.Cells["D1"].Value = "Due Date";
+
+
+                int row = 2;
+                foreach (var assignment in assignments)
+                {
+                    worksheet.Cells[row, 1].Value = assignment.CourseID;
+                    worksheet.Cells[row, 2].Value = assignment.Title;
+                    worksheet.Cells[row, 3].Value = assignment.Description;
+                    worksheet.Cells[row, 4].Value = assignment.DueDate.Day.ToString() + "/" + assignment.DueDate.Month.ToString() + "/" + assignment.DueDate.Year.ToString();
+                    row++;
+                }
+
+                // Save the Excel file.
+                excelPackage.SaveAs("assignment.xlsx");
+            }
+
+            stream.Position = 0;
+            string excelName = "AssignmentsRecord.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
     }
 }
