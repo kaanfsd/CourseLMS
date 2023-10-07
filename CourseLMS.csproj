@@ -7,6 +7,312 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Areas\Identity\Pages\Account\images\about-1.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\about.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\bg_1.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\bg_2.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\bg_4.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\image_1.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\image_2.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\image_3.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\image_4.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\image_5.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\image_6.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\person_1.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\person_2.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\person_3.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-1.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-2.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-3.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-4.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-5.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-6.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-7.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\teacher-8.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-1.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-2.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-3.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-4.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-5.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-6.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-8.jpg" />
+    <None Remove="Areas\Identity\Pages\Account\images\work-9.jpg" />
+    <None Remove="Areas\Identity\Pages\images\about-1.jpg" />
+    <None Remove="Areas\Identity\Pages\images\about.jpg" />
+    <None Remove="Areas\Identity\Pages\images\bg_1.jpg" />
+    <None Remove="Areas\Identity\Pages\images\bg_2.jpg" />
+    <None Remove="Areas\Identity\Pages\images\bg_4.jpg" />
+    <None Remove="Areas\Identity\Pages\images\image_1.jpg" />
+    <None Remove="Areas\Identity\Pages\images\image_2.jpg" />
+    <None Remove="Areas\Identity\Pages\images\image_3.jpg" />
+    <None Remove="Areas\Identity\Pages\images\image_4.jpg" />
+    <None Remove="Areas\Identity\Pages\images\image_5.jpg" />
+    <None Remove="Areas\Identity\Pages\images\image_6.jpg" />
+    <None Remove="Areas\Identity\Pages\images\person_1.jpg" />
+    <None Remove="Areas\Identity\Pages\images\person_2.jpg" />
+    <None Remove="Areas\Identity\Pages\images\person_3.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-1.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-2.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-3.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-4.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-5.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-6.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-7.jpg" />
+    <None Remove="Areas\Identity\Pages\images\teacher-8.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-1.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-2.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-3.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-4.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-5.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-6.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-8.jpg" />
+    <None Remove="Areas\Identity\Pages\images\work-9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Identity\Pages\Account\images\about-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\about.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\bg_1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\bg_2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\bg_4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\image_1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\image_2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\image_3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\image_4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\image_5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\image_6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\person_1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\person_2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\person_3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-7.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\teacher-8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\Account\images\work-9.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\about-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\about.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\bg_1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\bg_2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\bg_4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\image_1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\image_2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\image_3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\image_4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\image_5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\image_6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\person_1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\person_2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\person_3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-7.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\teacher-8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-2.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-3.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-4.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-5.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-6.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-8.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Identity\Pages\images\work-9.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
