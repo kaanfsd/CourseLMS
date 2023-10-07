@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace CourseLMS.Controllers
 {
@@ -17,10 +18,13 @@ namespace CourseLMS.Controllers
     public class CoursesController : Controller
     {
         private readonly DatabaseContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public CoursesController(DatabaseContext context)
+        public CoursesController(DatabaseContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
+
         }
 
         // GET: Courses
@@ -68,6 +72,7 @@ namespace CourseLMS.Controllers
         [Authorize(Policy = "AdminOrInstructor")]
         public IActionResult Create()
         {
+
             ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
@@ -86,6 +91,7 @@ namespace CourseLMS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
             return View(course);
         }
@@ -94,6 +100,9 @@ namespace CourseLMS.Controllers
         [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Edit(int? id)
         {
+            var instructors = _userManager.GetUsersInRoleAsync(StaticDetail.Role_Instructor).Result.ToList();
+
+            
             if (id == null || _context.Courses == null)
             {
                 return NotFound();
@@ -104,8 +113,14 @@ namespace CourseLMS.Controllers
             {
                 return NotFound();
             }
-            ViewData["InstructorID"] = new SelectList(_context.Users, "Id", "UserName", course.InstructorID);
-            return View(course);
+            if (User.IsInRole(StaticDetail.Role_Instructor))
+            { ViewData["InstructorID"] = new SelectList(_context.Users.Where(i => i.Id == course.InstructorID), "Id", "UserName", course.InstructorID); }
+            if (User.IsInRole(StaticDetail.Role_Admin))
+            {
+                ViewData["Instructors"] = new SelectList(instructors, "Id", "UserName");
+            }
+                
+                return View(course);
         }
 
         // POST: Courses/Edit/5
