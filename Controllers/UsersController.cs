@@ -163,7 +163,7 @@ public class UsersController : Controller
             return NotFound();
         }
 
-        var enrollments = _dbContext.Enrollments.Where(e => e.User.Id == id).ToList();
+        var enrollments = _dbContext.Enrollments.Where(e => e.Id == id).ToList();
 
         foreach (var enrollment in enrollments)
         {
@@ -172,20 +172,36 @@ public class UsersController : Controller
 
         await _dbContext.SaveChangesAsync();
 
-        var assigned = _dbContext.Courses.Where(c => c.InstructorID== id).ToList();
+        var courses = _dbContext.Courses.Where(e => e.InstructorID == id).ToList();
 
-        foreach (var assigne in assigned)
+        foreach (var course in courses)
         {
-            _dbContext.Courses.Remove(assigne);
+            var assignments = _dbContext.Assignments.Where(a => a.CourseID == course.CourseID).ToList();
+
+            foreach (var assignment in assignments)
+            {
+                _dbContext.Assignments.Remove(assignment);
+            }
+
+            await _dbContext.SaveChangesAsync();
+            var coursesgiven = _dbContext.Enrollments.Where(a => a.CourseID == course.CourseID).ToList();
+
+            foreach (var coursegiven in coursesgiven)
+            {
+                _dbContext.Enrollments.Remove(coursegiven);
+            }
+
+            await _dbContext.SaveChangesAsync();
+            _dbContext.Courses.Remove(course);
         }
 
         await _dbContext.SaveChangesAsync();
-
 
         var result = await _userManager.DeleteAsync(user);
 
         if (result.Succeeded)
         {
+
             return RedirectToAction("Index");
         }
 
