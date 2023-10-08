@@ -36,6 +36,7 @@
             };
         Random random = new Random();
         int randomIndex = random.Next(0, 10);
+        string bg_image = "~/images/bg_"+randomIndex.ToString()+".jpg";
     }
 
     <header>
@@ -104,9 +105,9 @@
             </div>
         </nav>
 
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('@Url.Content("~/images/bg_2.jpg")');">
+        <section class="hero-wrap hero-wrap-2" style="background-image: url('@Url.Content(bg_image)');">
             <figure  class="text-center mb-4 text-black" style=" position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;">
-                <blockquote class="blockquote mb-4">
+                <blockquote id="target" class="blockquote mb-4">
                     <p>
                         <span class="font-italic ">
                             @educationQuotes[randomIndex]
@@ -222,7 +223,15 @@
         gtag('config', 'UA-23581568-13');
     </script>
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"810c3d8b1cc892cb","version":"2023.8.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}' crossorigin="anonymous"></script>
+    <script>
+        window.addEventListener("load", function () {
+            // Get the target element.
+            var targetElement = document.querySelector("#target");
 
+            // Scroll to the target element.
+            targetElement.scrollIntoView();
+        });
+    </script>
 </body>
 @await RenderSectionAsync("Scripts", required:false)
 </html>

@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-<form asp-controller="Courses" asp-action="Index" method="get" style="text-align: center; margin-top: 20px;">
+
+<form  asp-controller="Courses" asp-action="Index" method="get" style="text-align: center; margin-top: 20px;">
     <div style="display: inline-block;">
         <label for="SearchString" style="font-weight: bold;">Title:</label>
         <input type="text" id="SearchString" name="SearchString" placeholder="Type Courses" style="margin-right: 10px; padding: 5px;" />
@@ -103,7 +104,7 @@
         }
         else
         {
-                <div class="card shadow border-0 mt-4">
+                <div  class="card shadow border-0 mt-4">
                     <div class="card-body p-4">
                         <div class="row pb-4">
                             <div class="col-6">
@@ -127,7 +128,7 @@
                                     </div>
 
                                     <div class="w-75 btn-group" role="group">
-                                        @if (ViewData["UserRole"] != null && ((string)ViewData["UserRole"] == "Instructor" && (string)ViewData["Instructor"] == @course.InstructorID))
+                                        @if (ViewData["UserRole"] != null && (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @course.InstructorID))
                                         {
                                             <a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.CourseID" class="btn btn-primary btn-sm mx-2">
                                                 <i class="bi bi-pencil-square"></i>Edit
@@ -151,4 +152,4 @@
             </div>
             </div>
         }
-        
+

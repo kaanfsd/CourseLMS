@@ -66,7 +66,7 @@ namespace CourseLMS.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+            //[EmailAddress]
             public string Email { get; set; }
 
             /// <summary>

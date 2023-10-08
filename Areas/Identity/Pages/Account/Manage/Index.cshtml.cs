@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CourseLMS.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,6 +18,7 @@ namespace CourseLMS.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        //private readonly IUserStore<User> _userStore;
 
         public IndexModel(
             UserManager<User> userManager,
@@ -24,6 +26,7 @@ namespace CourseLMS.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            //_userStore = userStore;
         }
 
         /// <summary>
@@ -59,18 +62,33 @@ namespace CourseLMS.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string? Name { get; set; }
+
+            public string? Surname { get; set; }
+            public string? UserName { get; set; }
         }
 
         private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var Current_user = await _userManager.FindByNameAsync(userName); // Replace with the user's actual username or email
+            
+            var name = Current_user.Name;
+            var surname = Current_user.Surname;
+                // Now you can use 'name' and 'surname' as needed.
+           
+            
+
 
             UserName = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Name = name,
+                Surname = surname
             };
         }
 
@@ -99,17 +117,31 @@ namespace CourseLMS.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
+            //await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
+            user.Name = Input.Name;
+            user.Surname = Input.Surname;
+            user.PhoneNumber = Input.PhoneNumber;
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+                // Successfully updated the user's properties
             }
+            else
+            {
+                // Handle errors if the update fails (e.g., validation errors)
+            }
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
