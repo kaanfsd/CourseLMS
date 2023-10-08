@@ -43,59 +43,16 @@
 </div>
 
 
+<div class="row pt-2 justify-content-center">
 
-
-@*<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-black py-2">Course Details</h2>
-            </div>
+    @if (ViewData["UserRole"] != null && (string)ViewData["UserRole"] == "Admin" || (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @Model.InstructorID))
+    {
+        <div class="col-6 col-md-3">
+            <a asp-action="Edit" asp-route-id="@Model?.CourseID" class="btn btn-outline-success form-control text-black">Edit</a>
         </div>
-    </div>
-    <dl class="card-body p-4">
-        <dt class="text-black">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="form-floating py-2 col-12">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="text-black">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="form-floating py-2 col-12">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="text-black">
-            @Html.DisplayNameFor(model => model.InstructorID)
-        </dt>
-        <dd class="form-floating py-2 col-12">
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
-        <dt class="text-black">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class="form-floating py-2 col-12">
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-        <dt class="text-black">
-            @Html.DisplayNameFor(model => model.EnrollmentCount)
-        </dt>
-        <dd class="form-floating py-2 col-12">
-            @Html.DisplayFor(model => model.EnrollmentCount)
-        </dd>
-        <dt class="text-black">
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </dt>
-        <dd class="form-floating py-2 col-12">
-            @Html.DisplayFor(model => model.ImageURL)
-        </dd>
-    </dl>
-</div>*@
-<div class="row pt-2">
-    <div class="col-6 col-md-3">
-        <a asp-action="Edit" asp-route-id="@Model?.CourseID" class="btn btn-outline-success form-control text-black">Edit</a>
-    </div>
+
+    }
+    
     <div class="col-6 col-md-3">
         <a asp-controller="Courses" asp-action="Index" class="btn btn-outline-primary border  form-control">
             Back to Courses
@@ -105,8 +62,8 @@
 <div>
     <!-- Display assignments -->
     
-    <div>
-        <h3 style="justify-content-center">Assignments for this Course:</h3>
+    <div class="container mt-5">
+        <h2 style="text-align:center">Assignments for this Course:</h2>
 
         <div class="row card-container justify-content-center">
             @foreach (var assignment in (List<Assignment>)ViewData["Assignments"])
@@ -125,13 +82,4 @@
         </div>
     </div>
     
-</div>
-<div>
-    @if (ViewData["UserRole"] != null && (string)ViewData["UserRole"] == "Admin" || (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @Model.InstructorID))
-    {
-        <a asp-action="Edit" asp-route-id="@Model?.CourseID">Edit</a>
-
-    }
-
-    <a asp-action="Index">Back to List</a>
 </div>
