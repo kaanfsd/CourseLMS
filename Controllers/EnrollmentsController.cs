@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace CourseLMS.Controllers
 {
+    [Authorize]
     public class EnrollmentsController : Controller
     {
         private readonly DatabaseContext _context;
@@ -240,11 +241,7 @@ namespace CourseLMS.Controllers
 
                 return RedirectToAction("Details", "Courses", new { id = id });
             }
-            else
-            {
-                // Redirect to the login page if the user is not authenticated.
-                return RedirectToAction("Login", "Account", new { area = "Identity" });
-            }
+            return RedirectToAction("Index", "Home");
         }
 
         // Check if a user is already enrolled in a course asynchronously.

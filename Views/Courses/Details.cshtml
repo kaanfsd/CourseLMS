@@ -3,8 +3,42 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="card shadow rounded-3 border-0 mt-4">
+    <div class="card-header bg-primary text-white py-3">
+        <h2 class="text-center">Course Details</h2>
+    </div>
+    <dl class="card-body p-4">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <dt class="text-dark">@Html.DisplayNameFor(model => model.Title)</dt>
+                <dd class="text-dark">@Html.DisplayFor(model => model.Title)</dd>
+            </div>
+            <div class="col-md-4 text-center">
+                <dt class="text-dark">@Html.DisplayNameFor(model => model.Description)</dt>
+                <dd class="text-dark">@Html.DisplayFor(model => model.Description)</dd>
+            </div>
+            <div class="col-md-4 text-center">
+                <dt class="text-dark">@Html.DisplayNameFor(model => model.InstructorID)</dt>
+                <dd class="text-dark">@Html.DisplayFor(model => model.User.UserName)</dd>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4 text-center">
+                <dt class="text-dark">@Html.DisplayNameFor(model => model.Category)</dt>
+                <dd class="text-dark">@Html.DisplayFor(model => model.Category)</dd>
+            </div>
+            <div class="col-md-4 text-center">
+                <dt class="text-dark">@Html.DisplayNameFor(model => model.EnrollmentCount)</dt>
+                <dd class="text-dark">@Html.DisplayFor(model => model.EnrollmentCount)</dd>
+            </div>
+        </div>
+    </dl>
+</div>
 
-<div class="card shadow border-0 mt-4">
+
+
+
+@*<div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -50,7 +84,7 @@
             @Html.DisplayFor(model => model.ImageURL)
         </dd>
     </dl>
-</div>
+</div>*@
 <div class="row pt-2">
     <div class="col-6 col-md-3">
         <a asp-action="Edit" asp-route-id="@Model?.CourseID" class="btn btn-outline-success form-control text-black">Edit</a>
@@ -64,12 +98,28 @@
 <div>
     <!-- Display assignments -->
     <h3>Assignments for this Course:</h3>
-    <ul>
+    <div class="container mt-5">
+        <div class="accordion" id="accordionExample">
+
         @foreach (var assignment in (List<Assignment>)ViewData["Assignments"])
         {
-            <li>@assignment.Title</li>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                @assignment.Title
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <input type="checkbox" id="checkbox1">
+                <label for="checkbox1">@assignment.Description</label>
+                </div>
+            </div>
+        </div>
         }
-    </ul>
+        </div>
+    </div>
+    
 </div>
 <div>
     @if (ViewData["UserRole"] != null && (string)ViewData["UserRole"] == "Admin" || (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @Model.InstructorID))

@@ -9,14 +9,19 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a id="manage" class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-white mt-3">Logout</button>
-            </form>
-    </li>
+        <li class="nav-item">
+            <div class="d-flex align-items-center">
+                <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                    Hello @UserManager.GetUserName(User)!
+                </a>
+                <form class="form-inline ml-2" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                    <button type="submit" class="nav-link">
+                        <!-- Use text-primary for the same color as "Hello" -->
+                        <span>Logout</span> <!-- Underline the "Logout" text -->
+                    </button>
+                </form>
+            </div>
+        </li>
 }
 else
 {

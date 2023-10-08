@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using OfficeOpenXml;
 
+[Authorize(Roles = StaticDetail.Role_Admin)]
 public class UsersController : Controller
 {
     private readonly UserManager<User> _userManager;

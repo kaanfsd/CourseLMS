@@ -1,14 +1,16 @@
 ﻿@model List<User>
 
 <form asp-controller="Users" asp-action="Index" method="get" style="text-align: center; margin-top: 20px;">
-    <div style="display: inline-block;">
-        <label for="SearchString" style="font-weight: bold;">Title:</label>
-        <input type="text" id="SearchString" name="SearchString" placeholder="Type Email" style="margin-right: 10px; padding: 5px;" />
-    </div>
-    <div style="display: inline-block;">
-        <input type="submit" value="Search" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; cursor: pointer;" />
+    <div class="input-group" style="max-width: 400px; margin: 0 auto; border-radius: 20px;">
+        <input type="text" id="SearchString" name="SearchString" class="form-control" placeholder="Search for Email" style="padding: 10px; border-radius: 20px 0 0 20px;">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary" style="border-radius: 0 20px 20px 0;">
+                Search
+            </button>
+        </div>
     </div>
 </form>
+
 
 <div class="card shadow border-0 mt-4">
     <div class="card-body p-4">
