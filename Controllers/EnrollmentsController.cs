@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CourseLMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using OfficeOpenXml;
+using System.Security.Claims;
 
 namespace CourseLMS.Controllers
 {
@@ -214,5 +215,59 @@ namespace CourseLMS.Controllers
                 return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
             }
         }
+
+       
+        public async Task<IActionResult> Enroll(int? id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                // Get the current user's ID from the authentication system.
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Assuming you use Identity for authentication.
+
+                // Check if the user is already enrolled in the course asynchronously.
+                bool isEnrolled = await IsUserEnrolledAsync(userId, id);
+
+                if (isEnrolled)
+                {
+                    ViewBag.Message = "You are already enrolled in this course.";
+                }
+                else
+                {
+                    // Enroll the user in the course asynchronously.
+                    await EnrollUserAsync(userId, id);
+                    ViewBag.Message = "Enrollment successful!";
+                }
+
+                return RedirectToAction("Details", "Courses", new { id = id });
+            }
+            else
+            {
+                // Redirect to the login page if the user is not authenticated.
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
+        }
+
+        // Check if a user is already enrolled in a course asynchronously.
+        private async Task<bool> IsUserEnrolledAsync(string userId, int? courseId)
+        {
+            // Implement your logic to check if the user is already enrolled in the course asynchronously.
+            // You may need to query your database or use your data access layer asynchronously.
+            // Return true if enrolled, false otherwise.
+            // Example:
+            var enrollment = await _context.Enrollments.FirstOrDefaultAsync(e => e.Id == userId && e.CourseID == courseId);
+            return enrollment != null;
+        }
+
+        // Enroll a user in a course asynchronously.
+        private async Task EnrollUserAsync(string userId, int? courseId)
+        {
+            // Implement your logic to enroll the user in the course asynchronously.
+            // You may need to add a new Enrollment record to your database or use your data access layer asynchronously.
+            // Example:
+            var enrollment = new Enrollment { Id = userId, CourseID = courseId };
+            _context.Enrollments.Add(enrollment);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

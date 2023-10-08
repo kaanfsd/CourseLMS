@@ -51,10 +51,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated && User.IsInRole(StaticDetail.Role_Student))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Course</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">My Courses</a>
                             </li>
                         }
                         @if (User.IsInRole(StaticDetail.Role_Admin))

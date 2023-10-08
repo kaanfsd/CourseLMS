@@ -111,7 +111,7 @@
                                 <h2 class="text-black py-2">Courses</h2>
                             </div>
                         </div>
-            <div class="row pb-3">
+            <div class="row pb-3 justify-content-center">
                 @foreach (var course in Model)
                 {
                     <div class="col-lg-3 col-sm-6">
@@ -122,12 +122,12 @@
                                     <div class="card-body pb-0">
                                         <div class="pl-1">
                                             <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@course.Title</p>
-                                            <p class="card-title text-warning text-center"><b>Instructor: @course.User.UserName</b></p>
+                                            <p class="card-title text-warning text-center"><b>Instructor: @course.User.Name</b></p>
                                         </div>
                                         <p>@course.Description</p>
                                     </div>
 
-                                    <div class="w-75 btn-group" role="group">
+                                    <div class="w-75 btn-group mx-auto d-flex justify-content-center" role="group">
                                         @if (ViewData["UserRole"] != null && (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @course.InstructorID))
                                         {
                                             <a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.CourseID" class="btn btn-primary btn-sm mx-2">
