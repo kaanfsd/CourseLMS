@@ -53,8 +53,8 @@
 
     }
     
-    <div class="col-6 col-md-3">
-        <a asp-controller="Courses" asp-action="Index" class="btn btn-outline-primary border  form-control">
+    <div class="col-6 col-md-3 mt-2">
+        <a asp-controller="Courses" asp-action="Index" style="border-radius: 20px;" class="btn btn-primary border  form-control">
             Back to Courses
         </a>
     </div>
@@ -73,7 +73,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@assignment.Title</h5>
                         <p class="card-text">@assignment.Description</p>
-                        <a asp-controller="UserProgresses" asp-action="Complete" asp-route-id="@assignment.AssignmentID" class="btn btn-primary btn-sm mx-2">Submit</a>
+                        <a asp-controller="UserProgresses" asp-action="Complete" asp-route-id="@assignment.AssignmentID" style="border-radius: 20px;" class="btn btn-primary btn-sm mx-2">Submit</a>
 
                     </div>
                 </div>
