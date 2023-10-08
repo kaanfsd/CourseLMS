@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CourseLMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CourseLMS.styles.css" asp-append-version="true" />
+    <link asp-href-include="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" asp-href-include="../../../stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" asp-href-include="css/animate.css">
+    <link rel="stylesheet" asp-href-include="css/owl.carousel.min.css">
+    <link rel="stylesheet" asp-href-include="css/owl.theme.default.min.css">
+    <link rel="stylesheet" asp-href-include="css/magnific-popup.css">
+    <link rel="stylesheet" asp-href-include="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" asp-href-include="css/jquery.timepicker.css">
+    <link rel="stylesheet" asp-href-include="css/flaticon.css">
+    <link rel="stylesheet" asp-href-include="css/style.css">
+    <script nonce="efaf640b-3b35-422f-814e-8857290a7b91">(function (w, d) { !function (a, b, c, d) { a[c] = a[c] || {}; a[c].executed = []; a.zaraz = { deferred: [], listeners: [] }; a.zaraz.q = []; a.zaraz._f = function (e) { return async function () { var f = Array.prototype.slice.call(arguments); a.zaraz.q.push({ m: e, a: f }) } }; for (const g of ["track", "set", "debug"]) a.zaraz[g] = a.zaraz._f(g); a.zaraz.init = () => { var h = b.getElementsByTagName(d)[0], i = b.createElement(d), j = b.getElementsByTagName("title")[0]; j && (a[c].t = b.getElementsByTagName("title")[0].text); a[c].x = Math.random(); a[c].w = a.screen.width; a[c].h = a.screen.height; a[c].j = a.innerHeight; a[c].e = a.innerWidth; a[c].l = a.location.href; a[c].r = b.referrer; a[c].k = a.screen.colorDepth; a[c].n = b.characterSet; a[c].o = (new Date).getTimezoneOffset(); if (a.dataLayer) for (const n of Object.entries(Object.entries(dataLayer).reduce(((o, p) => ({ ...o[1], ...p[1] })), {}))) zaraz.set(n[0], n[1], { scope: "page" }); a[c].q = []; for (; a.zaraz.q.length;) { const q = a.zaraz.q.shift(); a[c].q.push(q) } i.defer = !0; for (const r of [localStorage, sessionStorage]) Object.keys(r || {}).filter((t => t.startsWith("_zaraz_"))).forEach((s => { try { a[c]["z_" + s.slice(7)] = JSON.parse(r.getItem(s)) } catch { a[c]["z_" + s.slice(7)] = r.getItem(s) } })); i.referrerPolicy = "origin"; i.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(a[c]))); h.parentNode.insertBefore(i, h) };["complete", "interactive"].includes(b.readyState) ? zaraz.init() : a.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span>Course</span>LMS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="hero-wrap js-fullheight custom-hero-wrap" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-center custom-hero-content" data-scrollax-parent="true">
+                <div class="col-md-7 ftco-animate">
+                    <span class="subheading">Welcome to CourseLMS</span>
+                    <h1 class="mb-4">We Are Online Platform For Make Learn</h1>
+                    <p class="caps">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                </div>
+                <div>
+                    @RenderBody();
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center pb-4">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <span class="subheading">Start Learning Today</span>
+                    <h2 class="mb-4">Pick Your Course</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ftco-animate">
+                    <div class="project-wrap">
+                        <a href="#" class="img" style="background-image: url(images/work-1.jpg);">
+                            <span class="price">Software</span>
+                        </a>
+                        <div class="text p-4">
+                            <h3><a href="#">Design for the web with adobe photoshop</a></h3>
+                            <p class="advisor">Advisor <span>Tony Garret</span></p>
+                            <ul class="d-flex justify-content-between">
+                                <li><span class="flaticon-shower"></span>2300</li>
+                                <li class="price">$199</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <div class="project-wrap">
+                        <a href="#" class="img" style="background-image: url(images/work-2.jpg);">
+                            <span class="price">Software</span>
+                        </a>
+                        <div class="text p-4">
+                            <h3><a href="#">Design for the web with adobe photoshop</a></h3>
+                            <p class="advisor">Advisor <span>Tony Garret</span></p>
+                            <ul class="d-flex justify-content-between">
+                                <li><span class="flaticon-shower"></span>2300</li>
+                                <li class="price">$199</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <div class="project-wrap">
+                        <a href="#" class="img" style="background-image: url(images/work-3.jpg);">
+                            <span class="price">Software</span>
+                        </a>
+                        <div class="text p-4">
+                            <h3><a href="#">Design for the web with adobe photoshop</a></h3>
+                            <p class="advisor">Advisor <span>Tony Garret</span></p>
+                            <ul class="d-flex justify-content-between">
+                                <li><span class="flaticon-shower"></span>2300</li>
+                                <li class="price">$199</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <div class="project-wrap">
+                        <a href="#" class="img" style="background-image: url(images/work-4.jpg);">
+                            <span class="price">Software</span>
+                        </a>
+                        <div class="text p-4">
+                            <h3><a href="#">Design for the web with adobe photoshop</a></h3>
+                            <p class="advisor">Advisor <span>Tony Garret</span></p>
+                            <ul class="d-flex justify-content-between">
+                                <li><span class="flaticon-shower"></span>2300</li>
+                                <li class="price">$199</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <div class="project-wrap">
+                        <a href="#" class="img" style="background-image: url(images/work-8.jpg);">
+                            <span class="price">Software</span>
+                        </a>
+                        <div class="text p-4">
+                            <h3><a href="#">Design for the web with adobe photoshop</a></h3>
+                            <p class="advisor">Advisor <span>Tony Garret</span></p>
+                            <ul class="d-flex justify-content-between">
+                                <li><span class="flaticon-shower"></span>2300</li>
+                                <li class="price">$199</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ftco-animate">
+                    <div class="project-wrap">
+                        <a href="#" class="img" style="background-image: url(images/work-9.jpg);">
+                            <span class="price">Software</span>
+                        </a>
+                        <div class="text p-4">
+                            <h3><a href="#">Design for the web with adobe photoshop</a></h3>
+                            <p class="advisor">Advisor <span>Tony Garret</span></p>
+                            <ul class="d-flex justify-content-between">
+                                <li><span class="flaticon-shower"></span>2300</li>
+                                <li class="price">$199</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(images/bg_4.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 d-flex align-items-center">
+                        <div class="icon"><span class="flaticon-online"></span></div>
+                        <div class="text">
+                            <strong class="number" data-number="400">0</strong>
+                            <span>Online Courses</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 d-flex align-items-center">
+                        <div class="icon"><span class="flaticon-graduated"></span></div>
+                        <div class="text">
+                            <strong class="number" data-number="4500">0</strong>
+                            <span>Students Enrolled</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 d-flex align-items-center">
+                        <div class="icon"><span class="flaticon-instructor"></span></div>
+                        <div class="text">
+                            <strong class="number" data-number="1200">0</strong>
+                            <span>Experts Instructors</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18 d-flex align-items-center">
+                        <div class="icon"><span class="flaticon-tools"></span></div>
+                        <div class="text">
+                            <strong class="number" data-number="300">0</strong>
+                            <span>Hours Content</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="ftco-footer ftco-no-pt">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md pt-5">
+                    <div class="ftco-footer-widget pt-md-5 mb-4">
+                        <h2 class="ftco-heading-2">Recent Courses</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Computer Engineering</a></li>
+                            <li><a href="#" class="py-2 d-block">Web Design</a></li>
+                            <li><a href="#" class="py-2 d-block">Business Studies</a></li>
+                            <li><a href="#" class="py-2 d-block">Civil Engineering</a></li>
+                            <li><a href="#" class="py-2 d-block">Computer Technician</a></li>
+                            <li><a href="#" class="py-2 d-block">Web Developer</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md pt-5">
+                    <div class="ftco-footer-widget pt-md-5 mb-4">
+                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <div class="block-23 mb-3">
+                            <ul>
+                                <li><span class="icon fa fa-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text"><span class="__cf_email__" data-cfemail="4f262129200f36203a3d2b20222e2621612c2022">[email&#160;protected]</span></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>
+                        Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+    <script asp-src-include="~/lib/jquery/dist/jquery.min.js"></script>
+    <script asp-src-include="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script asp-src-include="~/js/site.js" asp-append-version="true"></script>
+    <script asp-src-include="js/jquery.min.js"></script>
+    <script asp-src-include="js/jquery-migrate-3.0.1.min.js"></script>
+    <script asp-src-include="js/popper.min.js"></script>
+    <script asp-src-include="js/bootstrap.min.js"></script>
+    <script asp-src-include="js/jquery.easing.1.3.js"></script>
+    <script asp-src-include="js/jquery.waypoints.min.js"></script>
+    <script asp-src-include="js/jquery.stellar.min.js"></script>
+    <script asp-src-include="js/owl.carousel.min.js"></script>
+    <script asp-src-include="js/jquery.magnific-popup.min.js"></script>
+    <script asp-src-include="js/jquery.animateNumber.min.js"></script>
+    <script asp-src-include="js/bootstrap-datepicker.js"></script>
+    <script asp-src-include="js/scrollax.min.js"></script>
+    <script asp-src-include="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
+    <script asp-src-include="js/google-map.js"></script>
+    <script asp-src-include="js/main.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"810c3d8b1cc892cb","version":"2023.8.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}' crossorigin="anonymous"></script>
+    <script>
+        window.addEventListener("load", function () {
+            // Get the target element.
+            var targetElement = document.querySelector("#target");
+
+            // Scroll to the target element.
+            targetElement.scrollIntoView();
+        });
+    </script>
+</body>
+@await RenderSectionAsync("Scripts", required:false)
+</html>
