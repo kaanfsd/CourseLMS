@@ -172,6 +172,16 @@ public class UsersController : Controller
 
         await _dbContext.SaveChangesAsync();
 
+        var assigned = _dbContext.Courses.Where(c => c.InstructorID== id).ToList();
+
+        foreach (var assigne in assigned)
+        {
+            _dbContext.Courses.Remove(assigne);
+        }
+
+        await _dbContext.SaveChangesAsync();
+
+
         var result = await _userManager.DeleteAsync(user);
 
         if (result.Succeeded)
