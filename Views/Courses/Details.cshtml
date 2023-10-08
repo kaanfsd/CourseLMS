@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Details";
+    var assignments = (List<Assignment>)ViewData["Assignments"];
+    int assignmentCount = assignments.Count;
+
 }
 <div class="card shadow rounded-3 border-0 mt-4">
     <div class="card-header bg-primary text-white py-3">
@@ -30,6 +33,10 @@
             <div class="col-md-4 text-center">
                 <dt class="text-dark">@Html.DisplayNameFor(model => model.EnrollmentCount)</dt>
                 <dd class="text-dark">@Html.DisplayFor(model => model.EnrollmentCount)</dd>
+            </div>
+            <div class="col-md-4 text-center">
+                <dt class="text-dark">@Html.DisplayNameFor(model => model.Assignments.Count)</dt>
+                <dd class="text-dark">@assignmentCount</dd>
             </div>
         </div>
     </dl>
