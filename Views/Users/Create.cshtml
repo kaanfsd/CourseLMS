@@ -1,36 +1,73 @@
-﻿@{
+﻿@model User
+@{
     ViewData["Title"] = "Create User";
 }
 
-<h1>Create User</h1>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-        <label for="role">Role:</label>
-        <select class="form-control" id="role" name="roleName">
-            @foreach (var role in ViewBag.Roles)
-            {
-                <option value="@role.Value">@role.Text</option>
-            }
-        </select>
-    </div>
-    <div class="row pt-2">
-        <div class="col-6 col-md-3">
-            <button type="submit" class="btn btn-outline-success form-control text-black">Create</button>
-        </div>
-        <div class="col-6 col-md-3">
-            <a asp-controller="Users" asp-action="Index" class="btn btn-outline-primary border  form-control">
-                Back to Users
-            </a>
+<div class="card shadow border-0 mt-4 row">
+    <div class="card-header bg-primary bg-gradient ml-0 py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (User.IsInRole(StaticDetail.Role_Admin))
+                {
+                    <h2 class="py-2 text-black">Register - ADMIN PORTAL</h2>
+                }
+            </div>
         </div>
     </div>
-</form>
 
+    <div class="card-body bg-dark-subtle p-4">
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <form asp-action="Create" method="post">
+                    <h3 class="border-bottom pb-3 mb-4 text-secondary text-center text-black">Create a new account.</h3>
+                    <div class="form-floating mb-3">
+                        <input for="email" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
+                        <label for="email" class="ms-2 text-muted">Email</label>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input for="UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
+                        <label for="UserName" class="ms-2 text-muted">Username</label>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input for="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                        <label for="password" class="ms-2 text-muted">Password</label>
+                        <span validation-for="email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input for="name" class="form-control" placeholder="" />
+                        <label for="name" class="ms-2 text-muted">Name</label>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input for="surname" class="form-control" placeholder="" />
+                        <label for="surname" class="ms-2 text-muted">Surname</label>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input for="phoneNumber" class="form-control" placeholder="" />
+                        <label for="phoneNumber" class="ms-2 text-muted">Phone Number</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select class="form-control" id="role" name="roleName">
+                            @foreach (var role in ViewBag.Roles)
+                            {
+                                <option value="@role.Value">@role.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

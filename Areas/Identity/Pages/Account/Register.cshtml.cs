@@ -190,8 +190,16 @@ namespace CourseLMS.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        if (User.IsInRole(StaticDetail.Role_Admin))
+                        {
+                            return RedirectToPage("Index", "Users");
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
+
                     }
                 }
                 foreach (var error in result.Errors)

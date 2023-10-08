@@ -23,86 +23,109 @@
     <div class="card-body bg-dark-subtle p-4">
         <div class="row pt-3">
             <div class="col-md-12">
-                <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    <h3 class="border-bottom pb-3 mb-4 text-secondary text-center text-black">Create a new account.</h3>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
-                        <label asp-for="Input.Email" class="ms-2 text-muted">Email</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
-                        <label asp-for="Input.UserName" class="ms-2 text-muted">Username</label>
-                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
-                        <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
-                        <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Name" class="form-control" placeholder="" />
-                        <label asp-for="Input.Name" class="ms-2 text-muted">Name</label>
-                        <span asp-validation-for="Input.Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Surname" class="form-control" placeholder="" />
-                        <label asp-for="Input.Surname" class="ms-2 text-muted">Surname</label>
-                        <span asp-validation-for="Input.Surname" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.PhoneNumber" class="form-control" placeholder="" />
-                        <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone Number</label>
-                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                            <option disabled selected>-Select Role-</option>
-                        </select>
-                    </div>
-                    <div class="col-12">
-                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-                    </div>
-                </form>
+                @if (User.IsInRole(StaticDetail.Role_Admin))
+                {
+                    <form id="registerForm" class="row" method="post">
+                        <h3 class="border-bottom pb-3 mb-4 text-secondary text-center text-black">Create a new account.</h3>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
+                            <label asp-for="Input.Email" class="ms-2 text-muted">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
+                            <label asp-for="Input.UserName" class="ms-2 text-muted">Username</label>
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                            <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                            <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Name" class="form-control" placeholder="" />
+                            <label asp-for="Input.Name" class="ms-2 text-muted">Name</label>
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Surname" class="form-control" placeholder="" />
+                            <label asp-for="Input.Surname" class="ms-2 text-muted">Surname</label>
+                            <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="" />
+                            <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone Number</label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                <option disabled selected>-Select Role-</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <h3 class="border-bottom pb-3 mb-4 text-secondary text-center text-black">Create a new account.</h3>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
+                            <label asp-for="Input.Email" class="ms-2 text-muted">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
+                            <label asp-for="Input.UserName" class="ms-2 text-muted">Username</label>
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                            <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                            <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Name" class="form-control" placeholder="" />
+                            <label asp-for="Input.Name" class="ms-2 text-muted">Name</label>
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.Surname" class="form-control" placeholder="" />
+                            <label asp-for="Input.Surname" class="ms-2 text-muted">Surname</label>
+                            <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="" />
+                            <label asp-for="Input.PhoneNumber" class="ms-2 text-muted">Phone Number</label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3 col-md-6">
+                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                <option disabled selected>-Select Role-</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                        </div>
+                    </form>
+                }
+
             </div>
-            @* <div class="col-md-12">
-            <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-            if ((Model.ExternalLogins?.Count ?? 0) == 0)
-            {
-            <div>
-            <p>
-            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-            article
-            about setting up this ASP.NET application to support logging in via external services
-            </a>.
-            </p>
-            </div>
-            }
-            else
-            {
-            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-            <div>
-            <p>
-            @foreach (var provider in Model.ExternalLogins!)
-            {
-            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-            }
-            </p>
-            </div>
-            </form>
-            }
-            }
-            </section>
-            </div> *@
+
         </div>
 
     </div>

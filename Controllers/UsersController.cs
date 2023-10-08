@@ -58,13 +58,16 @@ public class UsersController : Controller
     // POST: User/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(string email, string password, string roleName)
+    public async Task<IActionResult> Create(string email, string username, string roleName, string password, string name, string surname, string phoneNumber)
     {
         if (ModelState.IsValid)
         {
             var user = new User
             {
-                UserName = email,
+                UserName = username,
+                Name = name,
+                Surname = surname,
+                PhoneNumber = phoneNumber,
                 Email = email
             };
 
