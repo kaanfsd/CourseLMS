@@ -17,23 +17,25 @@ public class UsersController : Controller
 {
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly DatabaseContext _dbContext;
 
 
-    public UsersController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+    public UsersController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, DatabaseContext dbContext)
     {
         _userManager = userManager;
         _roleManager = roleManager;
+        _dbContext = dbContext;
     }
 
     // GET: User/Index
     public async Task<IActionResult> Index(string searchString)
     {
         var _users = from u in _userManager.Users
-                          select u;
+                     select u;
 
         var users = _userManager.Users.ToList();
-        
-        if(!String.IsNullOrEmpty(searchString))
+
+        if (!String.IsNullOrEmpty(searchString))
         {
             var filteredDbContext = _userManager.Users.Where(u => u.Email!.Contains(searchString));
 
@@ -160,6 +162,15 @@ public class UsersController : Controller
         {
             return NotFound();
         }
+
+        var enrollments = _dbContext.Enrollments.Where(e => e.User.Id == id).ToList();
+
+        foreach (var enrollment in enrollments)
+        {
+            _dbContext.Enrollments.Remove(enrollment);
+        }
+
+        await _dbContext.SaveChangesAsync();
 
         var result = await _userManager.DeleteAsync(user);
 

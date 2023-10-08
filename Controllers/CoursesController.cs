@@ -14,26 +14,28 @@ using OfficeOpenXml;
 namespace CourseLMS.Controllers
 {
     [Authorize]
-    
+
 
     public class CoursesController : Controller
     {
         private readonly DatabaseContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly DatabaseContext _dbContext;
 
-        public CoursesController(DatabaseContext context, UserManager<User> userManager)
+        public CoursesController(DatabaseContext context, UserManager<User> userManager, DatabaseContext dbContext)
         {
             _context = context;
             _userManager = userManager;
+            _dbContext = dbContext;
 
         }
 
         // GET: Courses
-        
+
         public async Task<IActionResult> Index(string searchString)
-        { 
-            var _courses= from c in _context.Courses
-                              select c;
+        {
+            var _courses = from c in _context.Courses
+                           select c;
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userEnrollments = _context.Enrollments.Where(enrollment => enrollment.Id == userId).ToList();
@@ -55,14 +57,14 @@ namespace CourseLMS.Controllers
                 return View(filteredDbContext);
 
             }
-            
+
             ViewData["Instructor"] = userId;
 
             return View(courses);
         }
 
         // GET: Courses/Details/5
-        
+
         public async Task<IActionResult> Details(int? id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -133,7 +135,7 @@ namespace CourseLMS.Controllers
         {
             var instructors = _userManager.GetUsersInRoleAsync(StaticDetail.Role_Instructor).Result.ToList();
 
-            
+
             if (id == null || _context.Courses == null)
             {
                 return NotFound();
@@ -150,8 +152,8 @@ namespace CourseLMS.Controllers
             {
                 ViewData["Instructors"] = new SelectList(instructors, "Id", "UserName");
             }
-                
-                return View(course);
+
+            return View(course);
         }
 
         // POST: Courses/Edit/5
@@ -221,19 +223,39 @@ namespace CourseLMS.Controllers
             {
                 return Problem("Entity set 'DatabaseContext.Courses'  is null.");
             }
+
+            var assignments = _dbContext.Assignments.Where(a => a.CourseID == id).ToList();
+
+            foreach (var assignment in assignments)
+            {
+                _dbContext.Assignments.Remove(assignment);
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+            var enrollments = _dbContext.Enrollments.Where(e => e.CourseID == id).ToList();
+
+            foreach (var enrollment in enrollments)
+            {
+                _dbContext.Enrollments.Remove(enrollment);
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+
             var course = await _context.Courses.FindAsync(id);
             if (course != null)
             {
                 _context.Courses.Remove(course);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CourseExists(int id)
         {
-          return (_context.Courses?.Any(e => e.CourseID == id)).GetValueOrDefault();
+            return (_context.Courses?.Any(e => e.CourseID == id)).GetValueOrDefault();
         }
         [HttpGet]
         [Authorize(Roles = StaticDetail.Role_Admin)]
