@@ -104,26 +104,24 @@
 </div>
 <div>
     <!-- Display assignments -->
-    <h3>Assignments for this Course:</h3>
-    <div class="container mt-5">
-        <div class="accordion" id="accordionExample">
+    
+    <div>
+        <h3 style="justify-content-center">Assignments for this Course:</h3>
 
-        @foreach (var assignment in (List<Assignment>)ViewData["Assignments"])
-        {
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                @assignment.Title
-            </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <input type="checkbox" id="checkbox1">
-                <label for="checkbox1">@assignment.Description</label>
+        <div class="row card-container justify-content-center">
+            @foreach (var assignment in (List<Assignment>)ViewData["Assignments"])
+            {
+                <div class="card m-2" style="width: 18rem;">
+                    <!-- "mb-3" adds margin to the bottom of the card -->
+                    <div class="card-body">
+                        <h5 class="card-title">@assignment.Title</h5>
+                        <p class="card-text">@assignment.Description</p>
+                        <a asp-controller="UserProgresses" asp-action="Complete" asp-route-id="@assignment.AssignmentID" class="btn btn-primary btn-sm mx-2">Submit</a>
+
+                    </div>
                 </div>
-            </div>
-        </div>
-        }
+
+            }
         </div>
     </div>
     
