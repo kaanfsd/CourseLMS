@@ -23,6 +23,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Enrollments
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Index(string searchString)
         {
             var enrollments = from e in _context.Enrollments
@@ -61,6 +62,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Enrollments/Create
+        [Authorize(Policy = "AdminOrInstructor")]
         public IActionResult Create()
         {
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title");
@@ -73,6 +75,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Create([Bind("EnrollmentID,Id,CourseID,EnrollmentDate")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
@@ -87,6 +90,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Enrollments/Edit/5
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Enrollments == null)
@@ -109,6 +113,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Edit([Bind("EnrollmentID,Id,CourseID,EnrollmentDate")] Enrollment enrollment)
         {
             
@@ -138,6 +143,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Enrollments/Delete/5
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Enrollments == null)
@@ -160,6 +166,7 @@ namespace CourseLMS.Controllers
         // POST: Enrollments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Enrollments == null)

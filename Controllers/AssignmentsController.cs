@@ -13,7 +13,7 @@ using OfficeOpenXml;
 namespace CourseLMS.Controllers
 {
     //[Authorize(Roles = StaticDetail.Role_Admin)]
-    [Authorize(Policy ="AdminOrInstructor")]
+    [Authorize]
     public class AssignmentsController : Controller
     {
         private readonly DatabaseContext _context;
@@ -24,6 +24,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Assignments
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Index(string searchString)
         {
 
@@ -45,6 +46,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Assignments/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Assignments == null)
@@ -64,6 +66,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Assignments/Create
+        [Authorize(Policy = "AdminOrInstructor")]
         public IActionResult Create()
         {
             ViewData["CourseID"] = new SelectList(_context.Courses, "CourseID", "Title");
@@ -75,6 +78,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Create([Bind("AssignmentID,CourseID,Title,Description,DueDate")] Assignment assignment)
         {
             if (ModelState.IsValid)
@@ -88,6 +92,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Assignments/Edit/5
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Assignments == null)
@@ -109,6 +114,7 @@ namespace CourseLMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Edit(int id, [Bind("AssignmentID,CourseID,Title,Description,DueDate")] Assignment assignment)
         {
             if (id != assignment.AssignmentID)
@@ -141,6 +147,7 @@ namespace CourseLMS.Controllers
         }
 
         // GET: Assignments/Delete/5
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Assignments == null)
@@ -162,6 +169,7 @@ namespace CourseLMS.Controllers
         // POST: Assignments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "AdminOrInstructor")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Assignments == null)
