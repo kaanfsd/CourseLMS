@@ -47,8 +47,8 @@
 
     @if (ViewData["UserRole"] != null && (string)ViewData["UserRole"] == "Admin" || (User.IsInRole(StaticDetail.Role_Instructor) && (string)ViewData["Instructor"] == @Model.InstructorID))
     {
-        <div class="col-6 col-md-3">
-            <a asp-action="Edit" asp-route-id="@Model?.CourseID" class="btn btn-outline-success form-control text-black">Edit</a>
+        <div class="col-6 col-md-3 mt-2">
+            <a asp-action="Edit" asp-route-id="@Model?.CourseID" style="border-radius: 20px;" class="btn btn-outline-success form-control text-black">Edit</a>
         </div>
 
     }
@@ -73,8 +73,12 @@
                     <div class="card-body">
                         <h5 class="card-title">@assignment.Title</h5>
                         <p class="card-text">@assignment.Description</p>
-                        <a asp-controller="UserProgresses" asp-action="Complete" asp-route-id="@assignment.AssignmentID" style="border-radius: 20px;" class="btn btn-primary btn-sm mx-2">Submit</a>
-
+                        <a id="submitBtn" style="border-radius: 20px;" class="btn btn-primary btn-sm mx-2">Submit</a>
+                        <script>
+                            document.getElementById("submitBtn").addEventListener("click", function () {
+                                this.innerText = "Completed";
+                            });
+                        </script>
                     </div>
                 </div>
 

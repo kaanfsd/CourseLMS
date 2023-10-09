@@ -1,12 +1,64 @@
 ﻿@model User
 
-<h1>Edit User</h1>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" asp-for="Email" required>
+<div class="card shadow border-0 mt-4 row">
+    <div class="card-header bg-gradient ml-0 py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (User.IsInRole(StaticDetail.Role_Admin))
+                {
+                    <h2 class="py-2 text-black">Edit User</h2>
+                }
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+
+    <div class="card-body p-4">
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="UserName" class="form-control" placeholder="" disabled />
+                        <label asp-for="UserName" class="ms-2 text-muted">Username</label>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" asp-for="Email" required>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Name" class="form-control" placeholder="" />
+                        <label for="name" class="ms-2 text-muted">Name</label>
+                        <span validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Surname" class="form-control" placeholder="" />
+                        <label for="surname" class="ms-2 text-muted">Surname</label>
+                        <span validation-for="surname" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="" />
+                        <label for="phoneNumber" class="ms-2 text-muted">Phone Number</label>
+                        <span validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-outline-success form-control text-black" style="border-radius: 20px;">Save</button>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Users" asp-action="Index" style="border-radius: 20px;" class="btn btn-primary border  form-control">
+                            Back to Users
+                        </a>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

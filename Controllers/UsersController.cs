@@ -115,7 +115,7 @@ public class UsersController : Controller
     // POST: User/Edit/{id}
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string id, string email)
+    public async Task<IActionResult> Edit(string id, string email, string name, string surname, string phoneNumber)
     {
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
@@ -124,6 +124,9 @@ public class UsersController : Controller
         }
 
         user.Email = email;
+        user.Name = name;
+        user.Surname = surname;
+        user.PhoneNumber = phoneNumber;
 
         var result = await _userManager.UpdateAsync(user);
 
